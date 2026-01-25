@@ -1,12 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المتوقد - منصة الطالب القانوني الذكية</title>
+    <title>مركز قيادة مجموعة القانون الخاص - S2</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -14,26 +15,98 @@
 </head>
 <body>
 
-    <nav class="sidebar">
-        <div class="logo">
-            <i class="fas fa-balance-scale"></i>
-            <h2>المتوقد</h2>
-        </div>
-        <ul class="nav-links">
-            <li class="active"><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li><a href="#"><i class="fas fa-book-open"></i> المواد الدراسية</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> الجدول الدراسي</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> المجموعات</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> التحليلات</a></li>
-        </ul>
-        <div class="user-profile">
-            <img src="https://via.placeholder.com/40" alt="User" class="avatar">
-            <div class="user-info">
-                <h4>طالب قانون</h4>
-                <span>المستوى الرابع</span>
+    <div class="platform-container">
+        
+        <header class="platform-header">
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fas fa-balance-scale"></i>
+                    <h1>مركز قيادة مجموعة القانون الخاص | S2</h1>
+                </div>
+                <div class="supervisor-info">
+                    <span>المشرف العام:</span>
+                    <strong id="supervisor-name">...</strong>
+                </div>
+            </div>
+            
+            <div class="global-countdown">
+                <h2>الوقت المتبقي للامتحانات</h2>
+                <div class="timer">
+                    <div class="time-unit">
+                        <span id="countdown-days">00</span>
+                        <label>أيام</label>
+                    </div>
+                    <div class="time-unit">
+                        <span id="countdown-hours">00</span>
+                        <label>ساعات</label>
+                    </div>
+                    <div class="time-unit">
+                        <span id="countdown-minutes">00</span>
+                        <label>دقائق</label>
+                    </div>
+                    <div class="time-unit">
+                        <span id="countdown-seconds">00</span>
+                        <label>ثواني</label>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="platform-main">
+            
+            <section class="dashboard">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-book"></i> لوحة تحكم المواد الدراسية</h2>
+                    <button class="action-btn"><i class="fas fa-edit"></i> تعديل التوزيع</button>
+                </div>
+                <div class="dashboard-content" id="subjects-dashboard-container">
+                    <!-- Subject cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <section class="dashboard">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-users"></i> لوحة تحكم أعضاء المجموعة</h2>
+                </div>
+                <div class="dashboard-content" id="members-dashboard-container">
+                    <!-- Member cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="platform-footer">
+            <p>تم تصميم مركز القيادة هذا لضمان النجاح الجماعي. بالتوفيق للجميع.</p>
+        </footer>
+
+    </div>
+
+    <!-- Focus Mode Modal -->
+    <div id="focus-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2 class="modal-title">جلسة تركيز</h2>
+            <p class="modal-subject" id="focus-modal-subject">...</p>
+            
+            <div class="focus-timer-display" id="focus-timer">25:00</div>
+            
+            <div class="focus-controls">
+                <button id="start-focus-btn" class="control-btn start"><i class="fas fa-play"></i> بدء</button>
+                <button id="pause-focus-btn" class="control-btn pause hidden"><i class="fas fa-pause"></i> إيقاف مؤقت</button>
+                <button id="end-focus-btn" class="control-btn end" disabled><i class="fas fa-stop"></i> إنهاء وتسجيل</button>
+            </div>
+
+            <div class="member-selection">
+                <label for="focus-member-select">من يقوم بالجلسة؟</label>
+                <select id="focus-member-select">
+                    <!-- Member options will be dynamically inserted here -->
+                </select>
             </div>
         </div>
-    </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
     <main class="main-content">
         
