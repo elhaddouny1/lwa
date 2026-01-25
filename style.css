@@ -7,12 +7,12 @@
     --accent-blue: #415a77;
     --text-light: #e0e1dd;
     --text-dark: #0d1b2a;
-    --accent-gold: #d4af37;
+    --accent-gold: #c5a230;
     --card-bg: #ffffff;
-    --border-color: #e0e1dd;
+    --border-color: #dee2e6;
     --success-color: #2a9d8f;
     --danger-color: #e76f51;
-    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     --font-primary: 'Tajawal', sans-serif;
     --font-secondary: 'Almarai', sans-serif;
 }
@@ -21,7 +21,7 @@
 
 body {
     font-family: var(--font-primary);
-    background-color: #f4f7f9;
+    background-color: #f8f9fa;
     color: var(--text-dark);
     line-height: 1.6;
 }
@@ -29,13 +29,13 @@ body {
 /* ==========================================================================
    2. Main Layout & Header
    ========================================================================== */
-.platform-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+.platform-container { max-width: 1400px; margin: 0 auto; padding: 15px; }
 .platform-header {
     background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-blue));
     color: var(--text-light);
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 25px;
     box-shadow: var(--shadow);
 }
 .header-top {
@@ -46,41 +46,41 @@ body {
     border-bottom: 1px solid var(--accent-blue);
 }
 .logo { display: flex; align-items: center; gap: 15px; }
-.logo i { font-size: 2rem; color: var(--accent-gold); }
-.logo h1 { font-family: var(--font-secondary); font-size: 1.5rem; font-weight: 700; }
-.supervisor-info { font-size: 1rem; }
+.logo i { font-size: 1.8rem; color: var(--accent-gold); }
+.logo h1 { font-family: var(--font-secondary); font-size: 1.3rem; font-weight: 700; }
+.supervisor-info { font-size: 0.9rem; }
 .supervisor-info strong { color: var(--accent-gold); font-weight: 700; }
 
 /* ==========================================================================
    3. Global Countdown Timer
    ========================================================================== */
 .global-countdown { text-align: center; padding-top: 20px; }
-.global-countdown h2 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 400; opacity: 0.9; }
-.global-countdown .timer { display: flex; justify-content: center; gap: 20px; }
-.timer .time-unit { background: rgba(0, 0, 0, 0.2); padding: 10px 15px; border-radius: 8px; min-width: 80px; }
-.time-unit span { display: block; font-size: 2.2rem; font-weight: 700; color: #fff; }
-.time-unit label { font-size: 0.8rem; opacity: 0.8; }
+.global-countdown h2 { font-size: 1.1rem; margin-bottom: 15px; font-weight: 400; opacity: 0.9; }
+.global-countdown .timer { display: flex; justify-content: center; gap: 15px; }
+.timer .time-unit { background: rgba(0, 0, 0, 0.2); padding: 8px 12px; border-radius: 8px; min-width: 70px; }
+.time-unit span { display: block; font-size: 2rem; font-weight: 700; color: #fff; }
+.time-unit label { font-size: 0.75rem; opacity: 0.8; }
 
 /* ==========================================================================
    4. Dashboards
    ========================================================================== */
-.platform-main { display: grid; gap: 30px; }
-.dashboard { background-color: var(--card-bg); border-radius: 12px; padding: 25px; box-shadow: var(--shadow); }
+.platform-main { display: flex; flex-direction: column; gap: 25px; }
+.dashboard { background-color: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
 .dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--border-color);
 }
-.dashboard-header h2 { font-family: var(--font-secondary); font-size: 1.4rem; display: flex; align-items: center; gap: 10px; color: var(--primary-dark-blue); }
+.dashboard-header h2 { font-family: var(--font-secondary); font-size: 1.3rem; display: flex; align-items: center; gap: 12px; color: var(--primary-dark-blue); }
 .action-btn {
     background-color: var(--accent-blue);
     color: var(--text-light);
     border: none;
     padding: 8px 16px;
-    border-radius: 6px;
+    border-radius: 8px;
     font-family: var(--font-primary);
     font-size: 0.9rem;
     cursor: pointer;
@@ -90,84 +90,67 @@ body {
     gap: 8px;
 }
 .action-btn:hover { background-color: var(--primary-dark-blue); }
-.dashboard-content { display: grid; gap: 20px; }
-#subjects-dashboard-container { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-#members-dashboard-container { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.dashboard-content { display: grid; gap: 15px; }
+
+/* Grid layout for dashboards */
+#subjects-dashboard-container { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+#members-dashboard-container { grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
 
 /* ==========================================================================
    5. Card Styles
    ========================================================================== */
-.subject-card { border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: box-shadow 0.3s, transform 0.3s; }
-.subject-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-.subject-card-header { background-color: #f8f9fa; padding: 15px; border-bottom: 1px solid var(--border-color); }
-.subject-card-header h3 { font-size: 1.1rem; color: var(--primary-dark-blue); }
-.subject-card-body { padding: 15px; font-size: 0.95rem; }
+.subject-card, .member-card, .smart-card { border: 1px solid var(--border-color); border-radius: 12px; transition: box-shadow 0.3s, transform 0.3s; }
+.subject-card:hover, .member-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+
+.subject-card { display: flex; flex-direction: column; }
+.subject-card-header { background-color: #fdfdff; padding: 12px 15px; border-bottom: 1px solid var(--border-color); }
+.subject-card-header h3 { font-size: 1.05rem; color: var(--primary-dark-blue); font-weight: 700; }
+.subject-card-body { padding: 15px; font-size: 0.9rem; flex-grow: 1; }
 .subject-card-body p { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
 .subject-card-body i { color: var(--accent-blue); }
-.time-info { font-size: 0.85rem; color: #555; }
-.subject-card-footer { background-color: #f8f9fa; padding: 10px 15px; text-align: center; }
-.focus-btn { width: 100%; background-color: var(--accent-gold); color: var(--text-dark); border: none; padding: 10px; border-radius: 6px; font-family: var(--font-primary); font-weight: 700; cursor: pointer; transition: background-color 0.3s; }
-.focus-btn:hover { background-color: #c5a230; }
+.subject-card-footer { background-color: #fdfdff; padding: 10px 15px; border-top: 1px solid #f0f0f0; }
+.focus-btn { width: 100%; background-color: var(--accent-gold); color: var(--text-dark); border: none; padding: 10px; border-radius: 8px; font-family: var(--font-primary); font-weight: 700; cursor: pointer; transition: background-color 0.3s; }
+.focus-btn:hover { background-color: #dab645; }
 
-.member-card { display: flex; flex-direction: column; gap: 10px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; }
-.member-info { display: flex; align-items: center; gap: 12px; }
-.member-info i { font-size: 1.5rem; color: var(--accent-blue); }
+.member-card { padding: 15px; }
+.member-info { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.member-info i { font-size: 1.4rem; color: var(--accent-blue); }
 .member-info h4 { font-size: 1.1rem; font-weight: 700; }
-.member-stats p { font-size: 0.9rem; margin-bottom: 8px; }
-.progress-bar { height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; }
+.member-stats p { font-size: 0.85rem; margin-bottom: 8px; }
+.progress-bar { height: 10px; background-color: #e9ecef; border-radius: 5px; overflow: hidden; }
 .progress-fill { height: 100%; background-color: var(--accent-blue); width: 0; transition: width 0.5s ease-in-out; }
+
+/* Smart Card (Active Member) */
+.smart-card { background: linear-gradient(135deg, #fff, #eef2ff); border-color: var(--accent-blue); }
+.smart-card-content { display: flex; align-items: center; gap: 20px; }
+.smart-card .icon { font-size: 3rem; color: var(--accent-gold); }
+.smart-card .text h4 { font-family: var(--font-secondary); font-size: 1.2rem; color: var(--primary-dark-blue); }
+.smart-card .text p { margin: 0; font-size: 1rem; }
+.smart-card .text strong { color: var(--success-color); font-weight: 700; }
 
 /* ==========================================================================
    6. Focus Mode Modal
    ========================================================================== */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.75); display: flex; justify-content: center; align-items: center;
+    z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
 }
 .modal-overlay:not(.hidden) { opacity: 1; pointer-events: all; }
 .modal-content {
-    background: var(--card-bg);
-    padding: 30px 40px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 480px;
-    text-align: center;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+    background: var(--card-bg); padding: 25px; border-radius: 16px;
+    width: 90%; max-width: 450px; text-align: center;
+    transform: scale(0.9); transition: transform 0.3s ease;
 }
 .modal-overlay:not(.hidden) .modal-content { transform: scale(1); }
 .modal-title { font-family: var(--font-secondary); color: var(--primary-dark-blue); margin-bottom: 5px; }
 .modal-subject { font-size: 1.1rem; color: var(--accent-blue); margin-bottom: 20px; font-weight: 700; }
-.focus-timer-display {
-    font-size: 5rem;
-    font-weight: 700;
-    color: var(--primary-dark-blue);
-    margin-bottom: 20px;
-}
-.focus-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+.focus-timer-display { font-size: 4.5rem; font-weight: 700; color: var(--primary-dark-blue); margin-bottom: 20px; }
+.focus-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
 .control-btn {
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-family: var(--font-primary);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    border: none; padding: 10px 18px; border-radius: 8px; font-family: var(--font-primary);
+    font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s;
+    display: flex; align-items: center; gap: 8px;
 }
 .control-btn.start { background-color: var(--success-color); color: white; }
 .control-btn.pause { background-color: var(--accent-gold); color: var(--text-dark); }
@@ -176,180 +159,29 @@ body {
 .member-selection { border-top: 1px solid var(--border-color); padding-top: 20px; }
 .member-selection label { display: block; margin-bottom: 10px; font-weight: 500; }
 .member-selection select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-family: var(--font-primary);
-    font-size: 1rem;
+    width: 100%; padding: 10px; border-radius: 8px;
+    border: 1px solid #ccc; font-family: var(--font-primary); font-size: 1rem;
 }
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   7. Footer & Responsive Design
+   7. Responsive Design (Mobile-First Enhancements)
    ========================================================================== */
-.platform-footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #777; }
-
 @media (max-width: 768px) {
+    .platform-container { padding: 10px; }
+    .platform-header { padding: 15px; }
     .header-top { flex-direction: column; align-items: flex-start; gap: 15px; }
-    .logo h1 { font-size: 1.2rem; }
+    .logo h1 { font-size: 1.1rem; }
     .global-countdown .timer { gap: 10px; }
-    .timer .time-unit { min-width: 65px; }
-    .time-unit span { font-size: 1.8rem; }
-    .dashboard-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-}
-    right: 0; /* للغة العربية */
-}
+    .time-unit span { font-size: 1.6rem; }
+    .dashboard-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    
+    /* Reorder dashboards on mobile for better UX */
+    .platform-main { display: flex; flex-direction: column-reverse; }
+    #smart-dashboard { order: -1; /* Make it appear first */ }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 40px;
-}
-
-.logo i { font-size: 2rem; color: var(--secondary-blue); }
-
-.nav-links { list-style: none; }
-.nav-links li { margin-bottom: 15px; }
-.nav-links a {
-    color: #cbd5e0;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-
-.nav-links li.active a, .nav-links a:hover {
-    background: var(--primary-blue);
-    color: white;
-}
-
-/* Main Content - المحتوى الرئيسي */
-.main-content {
-    margin-right: 260px; /* ليترك مساحة للسيدبار */
-    padding: 30px;
-    width: 100%;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.gamification-badge {
-    background: var(--accent-color);
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Countdown Timer */
-.countdown-container {
-    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-    color: white;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.timer-display {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.time-unit {
-    background: rgba(255,255,255,0.1);
-    padding: 15px;
-    border-radius: 10px;
-    min-width: 80px;
-}
-
-.time-unit span { font-size: 2.5rem; font-weight: bold; display: block; }
-
-/* Grid Layout */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 30px;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* Subjects Section */
-.subject-item {
-    background: #fdfdfd;
-    border: 1px solid #eee;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
-
-.subject-info { display: flex; justify-content: space-between; margin-bottom: 15px; }
-
-.progress-wrapper { position: relative; }
-.progress-slider {
-    width: 100%;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.progress-bar-bg {
-    height: 8px;
-    background: #eee;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--secondary-blue);
-    transition: width 0.5s ease-in-out;
-}
-
-/* AI Suggestions */
-.ai-card {
-    background: #eef2ff;
-    border-right: 5px solid var(--primary-blue);
-}
-
-.ai-text {
-    font-style: italic;
-    color: var(--dark-blue);
-    line-height: 1.6;
-}
-
-.pulse {
-    animation: pulse-animation 2s infinite;
-}
-
-@keyframes pulse-animation {
-    0% { opacity: 0.8; }
-    50% { opacity: 1; }
-    100% { opacity: 0.8; }
-}
-
-/* Hidden elements */
-.hidden { display: none; }
-
-/* Responsive - للتجاوب مع الجوال */
-@media (max-width: 992px) {
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .sidebar { width: 70px; }
-    .sidebar h2, .sidebar span, .sidebar h4 { display: none; }
-    .main-content { margin-right: 70px; }
+    .smart-card-content { flex-direction: column; text-align: center; gap: 10px; }
+    .smart-card .icon { font-size: 2.5rem; }
+    .smart-card .text h4 { font-size: 1.1rem; }
+    .smart-card .text p { font-size: 0.9rem; }
 }
