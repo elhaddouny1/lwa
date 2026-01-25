@@ -1,39 +1,203 @@
-/* إعدادات المتغيرات والألوان الأساسية */
+/* ==========================================================================
+   1. Global Settings & Variables
+   ========================================================================== */
 :root {
-    --primary-blue: #0056b3;
-    --secondary-blue: #00b4d8;
-    --dark-blue: #023e8a;
-    --light-bg: #f8f9fa;
-    --card-white: #ffffff;
-    --text-main: #333;
-    --text-muted: #777;
-    --accent-color: #ffca28; /* للجوائز والنقاط */
+    --primary-dark-blue: #0d1b2a;
+    --secondary-blue: #1b263b;
+    --accent-blue: #415a77;
+    --text-light: #e0e1dd;
+    --text-dark: #0d1b2a;
+    --accent-gold: #d4af37;
+    --card-bg: #ffffff;
+    --border-color: #e0e1dd;
+    --success-color: #2a9d8f;
+    --danger-color: #e76f51;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --font-primary: 'Tajawal', sans-serif;
+    --font-secondary: 'Almarai', sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Tajawal', sans-serif;
-    background-color: var(--light-bg);
-    color: var(--text-main);
-    display: flex;
-    min-height: 100vh;
+    font-family: var(--font-primary);
+    background-color: #f4f7f9;
+    color: var(--text-dark);
+    line-height: 1.6;
 }
 
-/* Sidebar - الشريط الجانبي */
-.sidebar {
-    width: 260px;
-    background: var(--dark-blue);
-    color: white;
-    padding: 20px;
+/* ==========================================================================
+   2. Main Layout & Header
+   ========================================================================== */
+.platform-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+.platform-header {
+    background: linear-gradient(135deg, var(--primary-dark-blue), var(--secondary-blue));
+    color: var(--text-light);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+.header-top {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--accent-blue);
+}
+.logo { display: flex; align-items: center; gap: 15px; }
+.logo i { font-size: 2rem; color: var(--accent-gold); }
+.logo h1 { font-family: var(--font-secondary); font-size: 1.5rem; font-weight: 700; }
+.supervisor-info { font-size: 1rem; }
+.supervisor-info strong { color: var(--accent-gold); font-weight: 700; }
+
+/* ==========================================================================
+   3. Global Countdown Timer
+   ========================================================================== */
+.global-countdown { text-align: center; padding-top: 20px; }
+.global-countdown h2 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 400; opacity: 0.9; }
+.global-countdown .timer { display: flex; justify-content: center; gap: 20px; }
+.timer .time-unit { background: rgba(0, 0, 0, 0.2); padding: 10px 15px; border-radius: 8px; min-width: 80px; }
+.time-unit span { display: block; font-size: 2.2rem; font-weight: 700; color: #fff; }
+.time-unit label { font-size: 0.8rem; opacity: 0.8; }
+
+/* ==========================================================================
+   4. Dashboards
+   ========================================================================== */
+.platform-main { display: grid; gap: 30px; }
+.dashboard { background-color: var(--card-bg); border-radius: 12px; padding: 25px; box-shadow: var(--shadow); }
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.dashboard-header h2 { font-family: var(--font-secondary); font-size: 1.4rem; display: flex; align-items: center; gap: 10px; color: var(--primary-dark-blue); }
+.action-btn {
+    background-color: var(--accent-blue);
+    color: var(--text-light);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.action-btn:hover { background-color: var(--primary-dark-blue); }
+.dashboard-content { display: grid; gap: 20px; }
+#subjects-dashboard-container { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+#members-dashboard-container { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+/* ==========================================================================
+   5. Card Styles
+   ========================================================================== */
+.subject-card { border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; transition: box-shadow 0.3s, transform 0.3s; }
+.subject-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.subject-card-header { background-color: #f8f9fa; padding: 15px; border-bottom: 1px solid var(--border-color); }
+.subject-card-header h3 { font-size: 1.1rem; color: var(--primary-dark-blue); }
+.subject-card-body { padding: 15px; font-size: 0.95rem; }
+.subject-card-body p { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.subject-card-body i { color: var(--accent-blue); }
+.time-info { font-size: 0.85rem; color: #555; }
+.subject-card-footer { background-color: #f8f9fa; padding: 10px 15px; text-align: center; }
+.focus-btn { width: 100%; background-color: var(--accent-gold); color: var(--text-dark); border: none; padding: 10px; border-radius: 6px; font-family: var(--font-primary); font-weight: 700; cursor: pointer; transition: background-color 0.3s; }
+.focus-btn:hover { background-color: #c5a230; }
+
+.member-card { display: flex; flex-direction: column; gap: 10px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; }
+.member-info { display: flex; align-items: center; gap: 12px; }
+.member-info i { font-size: 1.5rem; color: var(--accent-blue); }
+.member-info h4 { font-size: 1.1rem; font-weight: 700; }
+.member-stats p { font-size: 0.9rem; margin-bottom: 8px; }
+.progress-bar { height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; background-color: var(--accent-blue); width: 0; transition: width 0.5s ease-in-out; }
+
+/* ==========================================================================
+   6. Focus Mode Modal
+   ========================================================================== */
+.modal-overlay {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+.modal-overlay:not(.hidden) { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: var(--card-bg);
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.modal-overlay:not(.hidden) .modal-content { transform: scale(1); }
+.modal-title { font-family: var(--font-secondary); color: var(--primary-dark-blue); margin-bottom: 5px; }
+.modal-subject { font-size: 1.1rem; color: var(--accent-blue); margin-bottom: 20px; font-weight: 700; }
+.focus-timer-display {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--primary-dark-blue);
+    margin-bottom: 20px;
+}
+.focus-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+.control-btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.control-btn.start { background-color: var(--success-color); color: white; }
+.control-btn.pause { background-color: var(--accent-gold); color: var(--text-dark); }
+.control-btn.end { background-color: var(--danger-color); color: white; }
+.control-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+.member-selection { border-top: 1px solid var(--border-color); padding-top: 20px; }
+.member-selection label { display: block; margin-bottom: 10px; font-weight: 500; }
+.member-selection select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+}
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   7. Footer & Responsive Design
+   ========================================================================== */
+.platform-footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #777; }
+
+@media (max-width: 768px) {
+    .header-top { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .logo h1 { font-size: 1.2rem; }
+    .global-countdown .timer { gap: 10px; }
+    .timer .time-unit { min-width: 65px; }
+    .time-unit span { font-size: 1.8rem; }
+    .dashboard-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
     right: 0; /* للغة العربية */
 }
 
