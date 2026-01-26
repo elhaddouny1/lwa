@@ -176,6 +176,13 @@ body {
     100% { transform: scale(1); opacity: 1; }
 }
 
+.developer-credit {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
 /* Main Viewport */
 .main-viewport {
     flex-grow: 1;
