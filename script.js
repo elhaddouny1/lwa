@@ -8,6 +8,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================================================================================
     // 1. APP STATE & CONFIGURATION
     // =================================================================================
+    const THEMES = [
+        {
+            '--primary-bg': '#050a14',
+            '--accent-gold': '#d4af37',
+            '--accent-blue': '#00d2ff',
+            '--accent-purple': '#9d50bb',
+        },
+        {
+            '--primary-bg': '#1a1a2e',
+            '--accent-gold': '#e94560',
+            '--accent-blue': '#0f3460',
+            '--accent-purple': '#533483',
+        },
+        {
+            '--primary-bg': '#16213e',
+            '--accent-gold': '#fca311',
+            '--accent-blue': '#e5e5e5',
+            '--accent-purple': '#000000',
+        },
+        {
+            '--primary-bg': '#2d4059',
+            '--accent-gold': '#ffb400',
+            '--accent-blue': '#e5e5e5',
+            '--accent-purple': '#ea5455',
+        }
+    ];
+
+    function applyRandomTheme() {
+        const randomIndex = Math.floor(Math.random() * THEMES.length);
+        const selectedTheme = THEMES[randomIndex];
+        for (const [property, value] of Object.entries(selectedTheme)) {
+            document.documentElement.style.setProperty(property, value);
+        }
+    }
     const AppState = {
         supervisor: "أسماء",
         members: ["إيمان", "ناهد", "عبد المنعم", "خديجة", "مريم", "رباب", "يونس", "ناديا", "عتيقة", "عثمان", "محمد"],
@@ -79,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================================================================================
 
     function init() {
+        applyRandomTheme();
         loadData();
         renderUI();
         startGlobalTimer();
