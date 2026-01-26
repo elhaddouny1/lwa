@@ -1,6 +1,6 @@
 /**
- * MOTAWAQED OS - CORE ENGINE
- * Managing 19+ Advanced Legal Learning Features
+ * MOTAWAQED OS - CORE ENGINE (REVISED)
+ * Integrated with Real OpenAI API & Fixed Supervisor Info
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,8 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================================================================================
     const AppState = {
         currentPage: 'dashboard',
-        user: { name: "أسماء", rank: "مشرفة المنصة", points: 1250, streak: 12 },
+        user: { name: "محمد الهدوني", rank: "مشرف المنصة", points: 1250, streak: 12 },
         
+        // OpenAI Configuration
+        aiConfig: {
+            apiKey: "sk-fyKI2GzpBr2WXOyv85On6xUmoqFOIOKu40ZPD3EV14y73NJQ65P7Hw7sMJ0JYWL4VcG5mar3kTnEbCp5JGN4oe000OP6",
+            model: "gpt-3.5-turbo" // Using a standard model for stability
+        },
+
         library: [
             { id: 1, title: "نظرية الالتزامات - مبسط", category: "القانون المدني", author: "د. أحمد", views: 1240, content: "الالتزام هو رابطة قانونية بين شخصين..." },
             { id: 2, title: "مبادئ القانون الجنائي العام", category: "القانون الجنائي", author: "أ. سارة", views: 850, content: "الجريمة هي كل فعل أو امتناع مخالف للقانون..." },
@@ -43,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         flashcard: document.getElementById('current-flashcard'),
         aiModal: document.getElementById('ai-modal'),
         aiChatBox: document.getElementById('ai-chat-box'),
-        aiInput: document.querySelector('.ai-input input'),
+        aiInput: document.getElementById('ai-user-input'),
         aiSendBtn: document.getElementById('send-ai-msg'),
         sounds: {
             click: document.getElementById('snd-os-click'),
@@ -80,16 +86,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll(`[data-target="${target}"]`).forEach(i => i.classList.add('active'));
                 
                 UI.pages.forEach(p => p.classList.remove('active'));
-                document.getElementById(`page-${target}`).classList.add('active');
+                const targetPage = document.getElementById(`page-${target}`);
+                if (targetPage) targetPage.classList.add('active');
                 
                 AppState.currentPage = target;
             });
         });
 
-        // Quick AI Button (Mobile)
-        document.getElementById('quick-ai-btn').onclick = () => toggleAI(true);
-        document.getElementById('ai-assistant-trigger').onclick = () => toggleAI(true);
-        document.querySelector('.close-ai').onclick = () => toggleAI(false);
+        // Quick AI Button (Mobile & Desktop)
+        const aiTriggers = [document.getElementById('quick-ai-btn'), document.getElementById('ai-assistant-trigger')];
+        aiTriggers.forEach(btn => {
+            if (btn) btn.onclick = () => toggleAI(true);
+        });
+        
+        const closeAiBtn = document.querySelector('.close-ai');
+        if (closeAiBtn) closeAiBtn.onclick = () => toggleAI(false);
     }
 
     // =================================================================================
@@ -98,54 +109,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- DASHBOARD ENGINE ---
     function renderDashboard() {
-        // Render Mini Leaderboard
-        UI.miniLeaderboard.innerHTML = AppState.leaderboard.map((user, i) => `
-            <div class="leader-item animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
-                <img src="${user.avatar}" alt="${user.name}">
-                <div class="l-info">
-                    <span class="l-name">${user.name}</span>
-                    <span class="l-pts">${user.points} نقطة</span>
+        if (UI.miniLeaderboard) {
+            UI.miniLeaderboard.innerHTML = AppState.leaderboard.map((user, i) => `
+                <div class="leader-item animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
+                    <img src="${user.avatar}" alt="${user.name}">
+                    <div class="l-info">
+                        <span class="l-name">${user.name}</span>
+                        <span class="l-pts">${user.points} نقطة</span>
+                    </div>
+                    <div class="l-rank">#${i + 1}</div>
                 </div>
-                <div class="l-rank">#${i + 1}</div>
-            </div>
-        `).join('');
+            `).join('');
+        }
 
-        // Render Mini Planner
         const planner = document.getElementById('mini-planner');
-        const tasks = [
-            { title: "مراجعة القانون التجاري", time: "10:00 ص", done: true },
-            { title: "حل كويز الالتزامات", time: "02:00 م", done: false },
-            { title: "قراءة ملخص الجنائي", time: "06:00 م", done: false }
-        ];
-        planner.innerHTML = tasks.map(t => `
-            <div class="planner-item ${t.done ? 'done' : ''}">
-                <i class="fas ${t.done ? 'fa-circle-check' : 'fa-circle'}"></i>
-                <div class="p-task">
-                    <span>${t.title}</span>
-                    <small>${t.time}</small>
+        if (planner) {
+            const tasks = [
+                { title: "مراجعة القانون التجاري", time: "10:00 ص", done: true },
+                { title: "حل كويز الالتزامات", time: "02:00 م", done: false },
+                { title: "قراءة ملخص الجنائي", time: "06:00 م", done: false }
+            ];
+            planner.innerHTML = tasks.map(t => `
+                <div class="planner-item ${t.done ? 'done' : ''}">
+                    <i class="fas ${t.done ? 'fa-circle-check' : 'fa-circle'}"></i>
+                    <div class="p-task">
+                        <span>${t.title}</span>
+                        <small>${t.time}</small>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 
     // --- LIBRARY ENGINE ---
     function renderLibrary() {
-        UI.libraryContainer.innerHTML = AppState.library.map(item => `
-            <div class="lib-card glass-card">
-                <span class="lib-tag">${item.category}</span>
-                <h3>${item.title}</h3>
-                <p>${item.content.substring(0, 80)}...</p>
-                <div class="lib-meta">
-                    <span><i class="fas fa-user-pen"></i> ${item.author}</span>
-                    <span><i class="fas fa-eye"></i> ${item.views}</span>
+        if (UI.libraryContainer) {
+            UI.libraryContainer.innerHTML = AppState.library.map(item => `
+                <div class="lib-card glass-card">
+                    <span class="lib-tag">${item.category}</span>
+                    <h3>${item.title}</h3>
+                    <p>${item.content.substring(0, 80)}...</p>
+                    <div class="lib-meta">
+                        <span><i class="fas fa-user-pen"></i> ${item.author}</span>
+                        <span><i class="fas fa-eye"></i> ${item.views}</span>
+                    </div>
+                    <button class="btn-os-primary-outline" onclick="alert('سيتم فتح المقال الكامل قريباً!')">اقرأ المزيد</button>
                 </div>
-                <button class="btn-os-primary-outline" onclick="alert('سيتم فتح المقال الكامل قريباً!')">اقرأ المزيد</button>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 
     // --- FLASHCARDS ENGINE ---
     function setupFlashcards() {
+        if (!UI.flashcard) return;
+
         const updateCard = () => {
             const card = AppState.flashcards[AppState.currentFlashcardIndex];
             UI.flashcard.querySelector('.card-front h3').textContent = card.q;
@@ -155,12 +172,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         UI.flashcard.onclick = () => UI.flashcard.classList.toggle('flipped');
         
-        document.querySelector('.fc-btn.next').onclick = () => {
+        const nextBtn = document.querySelector('.fc-btn.next');
+        const prevBtn = document.querySelector('.fc-btn.prev');
+
+        if (nextBtn) nextBtn.onclick = (e) => {
+            e.stopPropagation();
             AppState.currentFlashcardIndex = (AppState.currentFlashcardIndex + 1) % AppState.flashcards.length;
             updateCard();
         };
         
-        document.querySelector('.fc-btn.prev').onclick = () => {
+        if (prevBtn) prevBtn.onclick = (e) => {
+            e.stopPropagation();
             AppState.currentFlashcardIndex = (AppState.currentFlashcardIndex - 1 + AppState.flashcards.length) % AppState.flashcards.length;
             updateCard();
         };
@@ -168,9 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCard();
     }
 
-    // --- AI ASSISTANT ENGINE ---
+    // --- REAL AI ASSISTANT ENGINE (OpenAI Integration) ---
     function setupAI() {
-        const sendMessage = () => {
+        const sendMessage = async () => {
             const text = UI.aiInput.value.trim();
             if (!text) return;
 
@@ -178,23 +200,43 @@ document.addEventListener('DOMContentLoaded', () => {
             appendMessage('user', text);
             UI.aiInput.value = '';
 
-            // Simulated AI Response
-            setTimeout(() => {
-                const response = getAIResponse(text);
-                appendMessage('ai', response);
-            }, 800);
+            // Loading State
+            const loadingMsg = appendMessage('ai', 'جاري التفكير في الرد القانوني...');
+
+            try {
+                const response = await fetchOpenAIResponse(text);
+                loadingMsg.textContent = response;
+            } catch (error) {
+                console.error("AI Error:", error);
+                loadingMsg.textContent = "عذراً، واجهت مشكلة في الاتصال بالخادم. يرجى التأكد من مفتاح API أو المحاولة لاحقاً.";
+            }
         };
 
-        UI.aiSendBtn.onclick = sendMessage;
-        UI.aiInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+        if (UI.aiSendBtn) UI.aiSendBtn.onclick = sendMessage;
+        if (UI.aiInput) UI.aiInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
     }
 
-    function getAIResponse(query) {
-        const q = query.toLowerCase();
-        if (q.includes("قانون")) return "القانون هو مجموعة القواعد التي تنظم سلوك الأفراد في المجتمع. هل تريد شرحاً لنوع معين؟";
-        if (q.includes("التزامات")) return "الالتزامات في القانون المدني تنقسم إلى مصادر إرادية (العقد) وغير إرادية (الفعل الضار).";
-        if (q.includes("شكراً")) return "العفو! أنا هنا دائماً لمساعدتك في رحلتك القانونية.";
-        return "سؤال رائع! دعني أبحث في قاعدة البيانات القانونية الخاصة بي... (هذا رد محاكي للذكاء الاصطناعي).";
+    async function fetchOpenAIResponse(query) {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${AppState.aiConfig.apiKey}`
+            },
+            body: JSON.stringify({
+                model: AppState.aiConfig.model,
+                messages: [
+                    { role: "system", content: "أنت مساعد قانوني ذكي لطلاب القانون في المغرب. وظيفتك تبسيط المفاهيم القانونية المعقدة وشرح الدروس بأسلوب سهل وممتع باللغة العربية." },
+                    { role: "user", content: query }
+                ],
+                temperature: 0.7
+            })
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch from OpenAI');
+        
+        const data = await response.json();
+        return data.choices[0].message.content;
     }
 
     function appendMessage(type, text) {
@@ -203,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         msg.textContent = text;
         UI.aiChatBox.appendChild(msg);
         UI.aiChatBox.scrollTop = UI.aiChatBox.scrollHeight;
+        return msg;
     }
 
     function toggleAI(show) {
@@ -224,12 +267,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupThemeToggle() {
-        document.querySelector('.theme-toggle').onclick = () => {
-            document.body.classList.toggle('light-mode');
-            const isLight = document.body.classList.contains('light-mode');
-            document.querySelector('.theme-toggle i').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-            playSound('click');
-        };
+        const toggle = document.querySelector('.theme-toggle');
+        if (toggle) {
+            toggle.onclick = () => {
+                document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                toggle.querySelector('i').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+                playSound('click');
+            };
+        }
     }
 
     // Run App
