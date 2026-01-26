@@ -478,6 +478,61 @@ body {
     color: var(--primary-bg);
 }
 
+/* Exam Card Styles */
+.exam-card-premium {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.exam-card-premium:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-blue);
+}
+
+.e-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.e-card-head .icon {
+    font-size: 1.5rem;
+    color: var(--accent-blue);
+}
+
+.e-card-head .badge {
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--accent-blue);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.e-card-body h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.e-card-body p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+}
+
+.e-card-footer {
+    margin-top: 20px;
+}
+
+.exam-card-premium:hover .p-btn-small {
+    background: var(--accent-blue);
+    color: var(--primary-bg);
+}
+
+
 /* Members List Glass */
 .members-list-glass {
     display: flex;
@@ -715,6 +770,12 @@ body {
 .hidden { display: none !important; }
 
 /* Responsive */
+@media (min-width: 1101px) {
+    #exams-section {
+        grid-column: 1 / span 2;
+    }
+}
+
 @media (max-width: 1100px) {
     .dashboards-layout { grid-template-columns: 1fr; }
     .glass-sidebar { width: 80px; padding: 30px 10px; }
@@ -733,4 +794,11 @@ body {
     .hero-text h1 { font-size: 1.8rem; }
     .insights-grid { grid-template-columns: 1fr; }
     .dashboards-layout { gap: 30px; }
+
+    .section-header h2 {
+        font-size: 1.2rem;
+    }
+    .glass-grid {
+        grid-template-columns: 1fr;
+    }
 }
