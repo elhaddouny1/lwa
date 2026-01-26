@@ -638,6 +638,13 @@ body {
 .timer-text span { display: block; font-size: 3.5rem; font-weight: 900; font-family: var(--font-alt); }
 .timer-text small { font-size: 0.9rem; color: var(--accent-gold); letter-spacing: 2px; }
 
+.pomodoro-info {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-around;
+    color: var(--text-dim);
+}
+
 .focus-member-picker { margin-bottom: 30px; text-align: right; }
 .focus-member-picker label { display: block; margin-bottom: 10px; color: var(--text-dim); }
 
