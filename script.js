@@ -65,7 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
             startTime: 0,
             elapsedSeconds: 0,
             isPaused: false,
-            duration: 60 * 60 // 60 minutes
+            pomodoroState: 'work', // 'work', 'shortBreak', 'longBreak'
+            pomodorosCompleted: 0,
+            durations: {
+                work: 25 * 60,
+                shortBreak: 5 * 60,
+                longBreak: 15 * 60,
+            }
         },
         activeNow: 0
     };
@@ -98,7 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
             startBtn: document.getElementById('btn-start-focus'),
             pauseBtn: document.getElementById('btn-pause-focus'),
             stopBtn: document.getElementById('btn-stop-focus'),
-            closeBtn: document.querySelector('.close-modal')
+            closeBtn: document.querySelector('.close-modal'),
+            sessionLabel: document.getElementById('pomodoro-session-label'),
+            completedLabel: document.getElementById('pomodoros-completed-label'),
+            status: document.getElementById('focus-status')
         },
         sounds: {
             click: document.getElementById('snd-click'),
@@ -322,7 +331,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetFocusTimerUI() {
-        UI.focusModal.timer.textContent = "60:00";
+        const session = AppState.focusSession;
+        const initialTime = session.durations.work;
+        const m = Math.floor(initialTime / 60);
+        const s = initialTime % 60;
+        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+        session.pomodoroState = 'work';
+        session.pomodorosCompleted = 0;
+
         UI.focusModal.progress.style.strokeDashoffset = 0;
         UI.focusModal.startBtn.classList.remove('hidden');
         UI.focusModal.pauseBtn.classList.add('hidden');
@@ -330,6 +347,51 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.focusModal.startBtn.disabled = true;
         UI.focusModal.memberPicker.style.pointerEvents = 'auto';
         UI.focusModal.memberPicker.style.opacity = '1';
+    }
+
+    function startNextPomodoroSession() {
+        const session = AppState.focusSession;
+
+        if (session.pomodoroState === 'work') {
+            // Work session finished, save time and start a break.
+            if (session.duration > 10) { // Only save if it was a real session
+                 AppState.timeTracking[session.member].total += session.duration;
+                 AppState.timeTracking[session.member].subjects[session.subject] += session.duration;
+                 saveData();
+                 renderUI();
+            }
+
+            session.pomodorosCompleted++;
+            playSound('success');
+            if (session.pomodorosCompleted > 0 && session.pomodorosCompleted % 4 === 0) {
+                session.pomodoroState = 'longBreak';
+            } else {
+                session.pomodoroState = 'shortBreak';
+            }
+        } else { // Break session finished, start a new work session.
+            session.pomodoroState = 'work';
+        }
+
+        session.duration = session.durations[session.pomodoroState];
+        session.elapsedSeconds = 0;
+
+        const sessionMap = {
+            work: 'جلسة عمل',
+            shortBreak: 'استراحة قصيرة',
+            longBreak: 'استراحة طويلة'
+        };
+        UI.focusModal.sessionLabel.textContent = sessionMap[session.pomodoroState];
+        UI.focusModal.completedLabel.textContent = `مكتمل: ${session.pomodorosCompleted}`;
+
+        const m = Math.floor(session.duration / 60);
+        const s = session.duration % 60;
+        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        UI.focusModal.status.textContent = session.pomodoroState === 'work' ? "جاري التركيز..." : "وقت الراحة!";
+
+        // Reset progress circle
+        const circumference = 2 * Math.PI * 110;
+        UI.focusModal.progress.style.strokeDasharray = circumference;
+        UI.focusModal.progress.style.strokeDashoffset = 0;
     }
 
     function startFocusSession() {
@@ -347,7 +409,18 @@ document.addEventListener('DOMContentLoaded', () => {
         UI.focusModal.memberPicker.style.pointerEvents = 'none';
         UI.focusModal.memberPicker.style.opacity = '0.5';
         
-        document.getElementById('focus-status').textContent = "جاري التركيز...";
+        const session = AppState.focusSession;
+        session.pomodoroState = 'work';
+        session.duration = session.durations.work;
+        session.elapsedSeconds = 0;
+        session.pomodorosCompleted = 0;
+
+        const m = Math.floor(session.duration / 60);
+        const s = session.duration % 60;
+        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        UI.focusModal.sessionLabel.textContent = 'جلسة عمل';
+        UI.focusModal.completedLabel.textContent = 'مكتمل: 0';
+        UI.focusModal.status.textContent = "جاري التركيز...";
         
         AppState.focusSession.timerId = setInterval(updateFocusTimer, 1000);
         AppState.activeNow++;
@@ -362,7 +435,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const remaining = session.duration - session.elapsedSeconds;
 
         if (remaining <= 0) {
-            endFocusSession(true);
+            // End of a session, transition to the next
+            startNextPomodoroSession();
             return;
         }
 
@@ -380,12 +454,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function endFocusSession(completed = false) {
         const session = AppState.focusSession;
         clearInterval(session.timerId);
-        
-        if (session.elapsedSeconds > 10) { // Only save if more than 10 seconds
+
+        if (session.pomodoroState === 'work' && session.elapsedSeconds > 10) {
             AppState.timeTracking[session.member].total += session.elapsedSeconds;
             AppState.timeTracking[session.member].subjects[session.subject] += session.elapsedSeconds;
             saveData();
             renderUI();
+        }
+
+        if (completed) {
             playSound('success');
         }
 
