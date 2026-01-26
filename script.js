@@ -1,574 +1,235 @@
 /**
- * المتوقد PRO - PREMIUM CORE ENGINE
- * Logic, Intelligence, and Interactive Experience
+ * MOTAWAQED OS - CORE ENGINE
+ * Managing 19+ Advanced Legal Learning Features
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     
     // =================================================================================
-    // 1. APP STATE & CONFIGURATION
+    // 1. APP STATE & DATA
     // =================================================================================
-    const THEMES = [
-        {
-            '--primary-bg': '#050a14',
-            '--accent-gold': '#d4af37',
-            '--accent-blue': '#00d2ff',
-            '--accent-purple': '#9d50bb',
-        },
-        {
-            '--primary-bg': '#1a1a2e',
-            '--accent-gold': '#e94560',
-            '--accent-blue': '#0f3460',
-            '--accent-purple': '#533483',
-        },
-        {
-            '--primary-bg': '#16213e',
-            '--accent-gold': '#fca311',
-            '--accent-blue': '#e5e5e5',
-            '--accent-purple': '#000000',
-        },
-        {
-            '--primary-bg': '#2d4059',
-            '--accent-gold': '#ffb400',
-            '--accent-blue': '#e5e5e5',
-            '--accent-purple': '#ea5455',
-        }
-    ];
-
-    function applyRandomTheme() {
-        const randomIndex = Math.floor(Math.random() * THEMES.length);
-        const selectedTheme = THEMES[randomIndex];
-        for (const [property, value] of Object.entries(selectedTheme)) {
-            document.documentElement.style.setProperty(property, value);
-        }
-    }
     const AppState = {
-        supervisor: "أسماء",
-        members: ["إيمان", "ناهد", "عبد المنعم", "خديجة", "مريم", "رباب", "يونس", "ناديا", "عتيقة", "عثمان", "محمد"],
-        subjects: [
-            { id: 1, name: "Théorie générale des obligations", icon: "fa-scroll" },
-            { id: 2, name: "Droit commercial (fondamentaux)", icon: "fa-briefcase" },
-            { id: 3, name: "Droit pénal général", icon: "fa-gavel" },
-            { id: 4, name: "Introduction aux relations internationales", icon: "fa-globe" },
-            { id: 5, name: "Introduction au droit administratif", icon: "fa-building-columns" },
-            { id: 6, name: "Loi e-transactions", icon: "fa-laptop-code" },
-            { id: 7, name: "Culture digitale & Intelligence Artificielle", icon: "fa-microchip" }
+        currentPage: 'dashboard',
+        user: { name: "أسماء", rank: "مشرفة المنصة", points: 1250, streak: 12 },
+        
+        library: [
+            { id: 1, title: "نظرية الالتزامات - مبسط", category: "القانون المدني", author: "د. أحمد", views: 1240, content: "الالتزام هو رابطة قانونية بين شخصين..." },
+            { id: 2, title: "مبادئ القانون الجنائي العام", category: "القانون الجنائي", author: "أ. سارة", views: 850, content: "الجريمة هي كل فعل أو امتناع مخالف للقانون..." },
+            { id: 3, title: "قانون الشركات المغربي 2024", category: "القانون التجاري", author: "المتوقد OS", views: 2100, content: "تعديلات جديدة تهم الشركات ذات المسؤولية المحدودة..." }
         ],
-        assignments: [],
-        timeTracking: {},
-        examDate: new Date("2026-06-15T09:00:00").getTime(),
-        focusSession: {
-            isActive: false,
-            subject: null,
-            member: null,
-            timerId: null,
-            startTime: 0,
-            elapsedSeconds: 0,
-            isPaused: false,
-            pomodoroState: 'work', // 'work', 'shortBreak', 'longBreak'
-            pomodorosCompleted: 0,
-            durations: {
-                work: 25 * 60,
-                shortBreak: 5 * 60,
-                longBreak: 15 * 60,
-            }
-        },
-        activeNow: 0
+        
+        flashcards: [
+            { q: "ما هو الفرق بين المسؤولية العقدية والتقصيرية؟", a: "العقدية تنشأ عن إخلال بعقد، والتقصيرية عن إخلال بواجب قانوني عام." },
+            { q: "ما هي أركان الجريمة الثلاثة؟", a: "الركن القانوني، الركن المادي، والركن المعنوي." },
+            { q: "متى تكتسب الشركة الشخصية المعنوية؟", a: "من تاريخ قيدها في السجل التجاري." }
+        ],
+        
+        leaderboard: [
+            { name: "إيمان", points: 2850, avatar: "https://ui-avatars.com/api/?name=Imane" },
+            { name: "عبد المنعم", points: 2420, avatar: "https://ui-avatars.com/api/?name=Abdo" },
+            { name: "ناهد", points: 2100, avatar: "https://ui-avatars.com/api/?name=Nahid" }
+        ],
+        
+        currentFlashcardIndex: 0,
+        isExamMode: false
     };
 
-    // DOM Elements Cache
+    // DOM Elements
     const UI = {
-        subjectsGrid: document.getElementById('subjects-grid'),
-        membersGrid: document.getElementById('members-grid'),
-        globalTimer: {
-            d: document.getElementById('d-val'),
-            h: document.getElementById('h-val'),
-            m: document.getElementById('m-val'),
-            s: document.getElementById('s-val'),
-            circle: document.getElementById('global-progress-circle'),
-            pct: document.getElementById('global-pct')
-        },
-        mvp: {
-            name: document.getElementById('mvp-name'),
-            time: document.getElementById('mvp-time')
-        },
-        activityBar: document.getElementById('activity-bar'),
-        groupStatusText: document.getElementById('group-status-text'),
-        activeCount: document.getElementById('active-count'),
-        focusModal: {
-            overlay: document.getElementById('focus-modal'),
-            title: document.getElementById('modal-subject-title'),
-            timer: document.getElementById('focus-time-display'),
-            progress: document.getElementById('timer-progress'),
-            memberPicker: document.getElementById('member-picker'),
-            startBtn: document.getElementById('btn-start-focus'),
-            pauseBtn: document.getElementById('btn-pause-focus'),
-            stopBtn: document.getElementById('btn-stop-focus'),
-            closeBtn: document.querySelector('.close-modal'),
-            sessionLabel: document.getElementById('pomodoro-session-label'),
-            completedLabel: document.getElementById('pomodoros-completed-label'),
-            status: document.getElementById('focus-status')
-        },
+        navItems: document.querySelectorAll('.nav-item, .m-nav-item'),
+        pages: document.querySelectorAll('.os-page'),
+        libraryContainer: document.getElementById('library-container'),
+        miniLeaderboard: document.getElementById('mini-leaderboard'),
+        flashcard: document.getElementById('current-flashcard'),
+        aiModal: document.getElementById('ai-modal'),
+        aiChatBox: document.getElementById('ai-chat-box'),
+        aiInput: document.querySelector('.ai-input input'),
+        aiSendBtn: document.getElementById('send-ai-msg'),
         sounds: {
-            click: document.getElementById('snd-click'),
-            start: document.getElementById('snd-start'),
-            success: document.getElementById('snd-success'),
-            ambient: document.getElementById('snd-ambient')
+            click: document.getElementById('snd-os-click'),
+            notif: document.getElementById('snd-os-notif')
         }
     };
 
     // =================================================================================
-    // 2. CORE ENGINE FUNCTIONS
+    // 2. CORE NAVIGATION ENGINE
     // =================================================================================
 
     function init() {
-        applyRandomTheme();
-        loadData();
-        renderUI();
-        startGlobalTimer();
-        setupEventListeners();
-        simulateActivity(); // Add some life to the UI
-    }
-
-    function loadData() {
-        const savedAssignments = localStorage.getItem('motawaqed_pro_assignments');
-        const savedTime = localStorage.getItem('motawaqed_pro_time');
-
-        if (savedAssignments) {
-            AppState.assignments = JSON.parse(savedAssignments);
-        } else {
-            shuffleAssignments();
-        }
-
-        if (savedTime) {
-            AppState.timeTracking = JSON.parse(savedTime);
-        } else {
-            AppState.members.forEach(m => {
-                AppState.timeTracking[m] = { total: 0, subjects: {} };
-                AppState.subjects.forEach(s => AppState.timeTracking[m].subjects[s.name] = 0);
-            });
-        }
-    }
-
-    function saveData() {
-        localStorage.setItem('motawaqed_pro_assignments', JSON.stringify(AppState.assignments));
-        localStorage.setItem('motawaqed_pro_time', JSON.stringify(AppState.timeTracking));
-    }
-
-    function shuffleAssignments() {
-        let shuffledMembers = [...AppState.members].sort(() => 0.5 - Math.random());
-        AppState.assignments = AppState.subjects.map((s, i) => ({
-            subject: s.name,
-            icon: s.icon,
-            deputy: shuffledMembers[i % shuffledMembers.length]
-        }));
-        saveData();
-    }
-
-    // =================================================================================
-    // 3. UI RENDERING
-    // =================================================================================
-
-    function renderUI() {
-        renderSubjects();
-        renderMembers();
-        updateInsights();
-    }
-
-    function renderSubjects() {
-        UI.subjectsGrid.innerHTML = '';
-        AppState.assignments.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = `subject-card-premium animate__animated animate__fadeInUp`;
-            card.style.animationDelay = `${index * 0.05}s`;
-            card.innerHTML = `
-                <div class="s-card-head">
-                    <div class="icon"><i class="fas ${item.icon}"></i></div>
-                    <div class="badge">S2</div>
-                </div>
-                <div class="s-card-body">
-                    <h3>${item.subject}</h3>
-                    <div class="deputy-info">
-                        <i class="fas fa-user-shield"></i>
-                        <span>النائب: <strong>${item.deputy}</strong></span>
-                    </div>
-                </div>
-                <div class="s-card-footer">
-                    <button class="p-btn-small focus-trigger" data-subject="${item.subject}">
-                        <i class="fas fa-stopwatch"></i> بدء التركيز
-                    </button>
-                </div>
-            `;
-            UI.subjectsGrid.appendChild(card);
-        });
-    }
-
-    function renderMembers() {
-        UI.membersGrid.innerHTML = '';
-        const sortedMembers = [...AppState.members].sort((a, b) => 
-            (AppState.timeTracking[b]?.total || 0) - (AppState.timeTracking[a]?.total || 0)
-        );
-
-        const maxTime = Math.max(...AppState.members.map(m => AppState.timeTracking[m].total), 1);
-
-        sortedMembers.forEach((member, index) => {
-            const data = AppState.timeTracking[member];
-            const hours = Math.floor(data.total / 3600);
-            const minutes = Math.floor((data.total % 3600) / 60);
-            const pct = (data.total / maxTime) * 100;
-
-            const row = document.createElement('div');
-            row.className = `member-row-premium animate__animated animate__fadeInRight`;
-            row.style.animationDelay = `${index * 0.05}s`;
-            row.innerHTML = `
-                <div class="m-avatar">${member.charAt(0)}</div>
-                <div class="m-details">
-                    <h4>${member}</h4>
-                    <div class="m-progress-mini">
-                        <div class="m-progress-fill" style="width: ${pct}%"></div>
-                    </div>
-                </div>
-                <div class="m-time">${hours}س ${minutes}د</div>
-            `;
-            UI.membersGrid.appendChild(row);
-        });
-    }
-
-    function updateInsights() {
-        // Find MVP
-        let mvp = { name: "لا أحد", time: 0 };
-        for (const m in AppState.timeTracking) {
-            if (AppState.timeTracking[m].total > mvp.time) {
-                mvp = { name: m, time: AppState.timeTracking[m].total };
-            }
-        }
+        setupNavigation();
+        renderDashboard();
+        renderLibrary();
+        setupFlashcards();
+        setupAI();
+        setupThemeToggle();
         
-        if (mvp.time > 0) {
-            UI.mvp.name.textContent = mvp.name;
-            const h = Math.floor(mvp.time / 3600);
-            const m = Math.floor((mvp.time % 3600) / 60);
-            UI.mvp.time.textContent = `${h}:${m.toString().padStart(2, '0')}`;
-        }
-
-        // Activity Bar
-        const totalTime = AppState.members.reduce((acc, m) => acc + AppState.timeTracking[m].total, 0);
-        const activityPct = Math.min((totalTime / (AppState.members.length * 3600 * 10)) * 100, 100);
-        UI.activityBar.style.width = `${activityPct}%`;
-        
-        if (activityPct < 20) UI.groupStatusText.textContent = "بداية هادئة";
-        else if (activityPct < 50) UI.groupStatusText.textContent = "نشاط متوسط";
-        else UI.groupStatusText.textContent = "حالة استنفار قصوى 🔥";
+        // Initial Sound
+        setTimeout(() => playSound('notif'), 1000);
     }
 
-    // =================================================================================
-    // 4. TIMERS & ANIMATIONS
-    // =================================================================================
-
-    function startGlobalTimer() {
-        const radius = 52;
-        const circumference = 2 * Math.PI * radius;
-        UI.globalTimer.circle.style.strokeDasharray = `${circumference} ${circumference}`;
-
-        function update() {
-            const now = new Date().getTime();
-            const distance = AppState.examDate - now;
-
-            if (distance < 0) {
-                UI.globalTimer.d.textContent = "00";
-                return;
-            }
-
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-            UI.globalTimer.d.textContent = d.toString().padStart(2, '0');
-            UI.globalTimer.h.textContent = h.toString().padStart(2, '0');
-            UI.globalTimer.m.textContent = m.toString().padStart(2, '0');
-            UI.globalTimer.s.textContent = s.toString().padStart(2, '0');
-
-            // Progress Circle (Assuming 150 days total semester)
-            const totalDays = 150;
-            const elapsedDays = totalDays - d;
-            const pct = Math.min((elapsedDays / totalDays) * 100, 100);
-            const offset = circumference - (pct / 100) * circumference;
-            UI.globalTimer.circle.style.strokeDashoffset = offset;
-            UI.globalTimer.pct.textContent = `${Math.floor(pct)}%`;
-        }
-
-        setInterval(update, 1000);
-        update();
-    }
-
-    // =================================================================================
-    // 5. FOCUS MODE ENGINE
-    // =================================================================================
-
-    function openFocusModal(subject) {
-        playSound('click');
-        AppState.focusSession.subject = subject;
-        UI.focusModal.title.textContent = subject;
-        
-        // Populate member picker
-        UI.focusModal.memberPicker.innerHTML = '';
-        AppState.members.forEach(m => {
-            const chip = document.createElement('div');
-            chip.className = 'm-chip';
-            chip.textContent = m;
-            chip.onclick = () => {
+    function setupNavigation() {
+        UI.navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const target = item.dataset.target;
+                if (!target) return;
+                
                 playSound('click');
-                document.querySelectorAll('.m-chip').forEach(c => c.classList.remove('selected'));
-                chip.classList.add('selected');
-                AppState.focusSession.member = m;
-                UI.focusModal.startBtn.disabled = false;
-            };
-            UI.focusModal.memberPicker.appendChild(chip);
+                
+                // Update UI
+                UI.navItems.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll(`[data-target="${target}"]`).forEach(i => i.classList.add('active'));
+                
+                UI.pages.forEach(p => p.classList.remove('active'));
+                document.getElementById(`page-${target}`).classList.add('active');
+                
+                AppState.currentPage = target;
+            });
         });
 
-        UI.focusModal.overlay.classList.remove('hidden');
-        resetFocusTimerUI();
-    }
-
-    function resetFocusTimerUI() {
-        const session = AppState.focusSession;
-        const initialTime = session.durations.work;
-        const m = Math.floor(initialTime / 60);
-        const s = initialTime % 60;
-        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-
-        session.pomodoroState = 'work';
-        session.pomodorosCompleted = 0;
-
-        UI.focusModal.progress.style.strokeDashoffset = 0;
-        UI.focusModal.startBtn.classList.remove('hidden');
-        UI.focusModal.pauseBtn.classList.add('hidden');
-        UI.focusModal.stopBtn.disabled = true;
-        UI.focusModal.startBtn.disabled = true;
-        UI.focusModal.memberPicker.style.pointerEvents = 'auto';
-        UI.focusModal.memberPicker.style.opacity = '1';
-    }
-
-    function startNextPomodoroSession() {
-        const session = AppState.focusSession;
-
-        if (session.pomodoroState === 'work') {
-            // Work session finished, save time and start a break.
-            if (session.duration > 10) { // Only save if it was a real session
-                 AppState.timeTracking[session.member].total += session.duration;
-                 AppState.timeTracking[session.member].subjects[session.subject] += session.duration;
-                 saveData();
-                 renderUI();
-            }
-
-            session.pomodorosCompleted++;
-            playSound('success');
-            if (session.pomodorosCompleted > 0 && session.pomodorosCompleted % 4 === 0) {
-                session.pomodoroState = 'longBreak';
-            } else {
-                session.pomodoroState = 'shortBreak';
-            }
-        } else { // Break session finished, start a new work session.
-            session.pomodoroState = 'work';
-        }
-
-        session.duration = session.durations[session.pomodoroState];
-        session.elapsedSeconds = 0;
-
-        const sessionMap = {
-            work: 'جلسة عمل',
-            shortBreak: 'استراحة قصيرة',
-            longBreak: 'استراحة طويلة'
-        };
-        UI.focusModal.sessionLabel.textContent = sessionMap[session.pomodoroState];
-        UI.focusModal.completedLabel.textContent = `مكتمل: ${session.pomodorosCompleted}`;
-
-        const m = Math.floor(session.duration / 60);
-        const s = session.duration % 60;
-        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        UI.focusModal.status.textContent = session.pomodoroState === 'work' ? "جاري التركيز..." : "وقت الراحة!";
-
-        // Reset progress circle
-        const circumference = 2 * Math.PI * 110;
-        UI.focusModal.progress.style.strokeDasharray = circumference;
-        UI.focusModal.progress.style.strokeDashoffset = 0;
-    }
-
-    function startFocusSession() {
-        if (!AppState.focusSession.member) return;
-        
-        playSound('start');
-        AppState.focusSession.isActive = true;
-        AppState.focusSession.isPaused = false;
-        AppState.focusSession.startTime = Date.now();
-        AppState.focusSession.elapsedSeconds = 0;
-
-        UI.focusModal.startBtn.classList.add('hidden');
-        UI.focusModal.pauseBtn.classList.remove('hidden');
-        UI.focusModal.stopBtn.disabled = false;
-        UI.focusModal.memberPicker.style.pointerEvents = 'none';
-        UI.focusModal.memberPicker.style.opacity = '0.5';
-        
-        const session = AppState.focusSession;
-        session.pomodoroState = 'work';
-        session.duration = session.durations.work;
-        session.elapsedSeconds = 0;
-        session.pomodorosCompleted = 0;
-
-        const m = Math.floor(session.duration / 60);
-        const s = session.duration % 60;
-        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        UI.focusModal.sessionLabel.textContent = 'جلسة عمل';
-        UI.focusModal.completedLabel.textContent = 'مكتمل: 0';
-        UI.focusModal.status.textContent = "جاري التركيز...";
-        
-        AppState.focusSession.timerId = setInterval(updateFocusTimer, 1000);
-        AppState.activeNow++;
-        updateActiveCount();
-    }
-
-    function updateFocusTimer() {
-        const session = AppState.focusSession;
-        if (!session.isActive || session.isPaused) return;
-
-        session.elapsedSeconds++;
-        const remaining = session.duration - session.elapsedSeconds;
-
-        if (remaining <= 0) {
-            // End of a session, transition to the next
-            startNextPomodoroSession();
-            return;
-        }
-
-        const m = Math.floor(remaining / 60);
-        const s = remaining % 60;
-        UI.focusModal.timer.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-
-        // Progress Circle
-        const circumference = 2 * Math.PI * 110;
-        const offset = (session.elapsedSeconds / session.duration) * circumference;
-        UI.focusModal.progress.style.strokeDasharray = circumference;
-        UI.focusModal.progress.style.strokeDashoffset = offset;
-    }
-
-    function endFocusSession(completed = false) {
-        const session = AppState.focusSession;
-        clearInterval(session.timerId);
-
-        if (session.pomodoroState === 'work' && session.elapsedSeconds > 10) {
-            AppState.timeTracking[session.member].total += session.elapsedSeconds;
-            AppState.timeTracking[session.member].subjects[session.subject] += session.elapsedSeconds;
-            saveData();
-            renderUI();
-        }
-
-        if (completed) {
-            playSound('success');
-        }
-
-        AppState.activeNow = Math.max(0, AppState.activeNow - 1);
-        updateActiveCount();
-        
-        UI.focusModal.overlay.classList.add('hidden');
-        session.isActive = false;
-        stopAmbient();
+        // Quick AI Button (Mobile)
+        document.getElementById('quick-ai-btn').onclick = () => toggleAI(true);
+        document.getElementById('ai-assistant-trigger').onclick = () => toggleAI(true);
+        document.querySelector('.close-ai').onclick = () => toggleAI(false);
     }
 
     // =================================================================================
-    // 6. INTERACTIVE ELEMENTS
+    // 3. FEATURE ENGINES
+    // =================================================================================
+
+    // --- DASHBOARD ENGINE ---
+    function renderDashboard() {
+        // Render Mini Leaderboard
+        UI.miniLeaderboard.innerHTML = AppState.leaderboard.map((user, i) => `
+            <div class="leader-item animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
+                <img src="${user.avatar}" alt="${user.name}">
+                <div class="l-info">
+                    <span class="l-name">${user.name}</span>
+                    <span class="l-pts">${user.points} نقطة</span>
+                </div>
+                <div class="l-rank">#${i + 1}</div>
+            </div>
+        `).join('');
+
+        // Render Mini Planner
+        const planner = document.getElementById('mini-planner');
+        const tasks = [
+            { title: "مراجعة القانون التجاري", time: "10:00 ص", done: true },
+            { title: "حل كويز الالتزامات", time: "02:00 م", done: false },
+            { title: "قراءة ملخص الجنائي", time: "06:00 م", done: false }
+        ];
+        planner.innerHTML = tasks.map(t => `
+            <div class="planner-item ${t.done ? 'done' : ''}">
+                <i class="fas ${t.done ? 'fa-circle-check' : 'fa-circle'}"></i>
+                <div class="p-task">
+                    <span>${t.title}</span>
+                    <small>${t.time}</small>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // --- LIBRARY ENGINE ---
+    function renderLibrary() {
+        UI.libraryContainer.innerHTML = AppState.library.map(item => `
+            <div class="lib-card glass-card">
+                <span class="lib-tag">${item.category}</span>
+                <h3>${item.title}</h3>
+                <p>${item.content.substring(0, 80)}...</p>
+                <div class="lib-meta">
+                    <span><i class="fas fa-user-pen"></i> ${item.author}</span>
+                    <span><i class="fas fa-eye"></i> ${item.views}</span>
+                </div>
+                <button class="btn-os-primary-outline" onclick="alert('سيتم فتح المقال الكامل قريباً!')">اقرأ المزيد</button>
+            </div>
+        `).join('');
+    }
+
+    // --- FLASHCARDS ENGINE ---
+    function setupFlashcards() {
+        const updateCard = () => {
+            const card = AppState.flashcards[AppState.currentFlashcardIndex];
+            UI.flashcard.querySelector('.card-front h3').textContent = card.q;
+            UI.flashcard.querySelector('.card-back p').textContent = card.a;
+            UI.flashcard.classList.remove('flipped');
+        };
+
+        UI.flashcard.onclick = () => UI.flashcard.classList.toggle('flipped');
+        
+        document.querySelector('.fc-btn.next').onclick = () => {
+            AppState.currentFlashcardIndex = (AppState.currentFlashcardIndex + 1) % AppState.flashcards.length;
+            updateCard();
+        };
+        
+        document.querySelector('.fc-btn.prev').onclick = () => {
+            AppState.currentFlashcardIndex = (AppState.currentFlashcardIndex - 1 + AppState.flashcards.length) % AppState.flashcards.length;
+            updateCard();
+        };
+
+        updateCard();
+    }
+
+    // --- AI ASSISTANT ENGINE ---
+    function setupAI() {
+        const sendMessage = () => {
+            const text = UI.aiInput.value.trim();
+            if (!text) return;
+
+            // User Message
+            appendMessage('user', text);
+            UI.aiInput.value = '';
+
+            // Simulated AI Response
+            setTimeout(() => {
+                const response = getAIResponse(text);
+                appendMessage('ai', response);
+            }, 800);
+        };
+
+        UI.aiSendBtn.onclick = sendMessage;
+        UI.aiInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+    }
+
+    function getAIResponse(query) {
+        const q = query.toLowerCase();
+        if (q.includes("قانون")) return "القانون هو مجموعة القواعد التي تنظم سلوك الأفراد في المجتمع. هل تريد شرحاً لنوع معين؟";
+        if (q.includes("التزامات")) return "الالتزامات في القانون المدني تنقسم إلى مصادر إرادية (العقد) وغير إرادية (الفعل الضار).";
+        if (q.includes("شكراً")) return "العفو! أنا هنا دائماً لمساعدتك في رحلتك القانونية.";
+        return "سؤال رائع! دعني أبحث في قاعدة البيانات القانونية الخاصة بي... (هذا رد محاكي للذكاء الاصطناعي).";
+    }
+
+    function appendMessage(type, text) {
+        const msg = document.createElement('div');
+        msg.className = `msg ${type} animate__animated animate__fadeInUp`;
+        msg.textContent = text;
+        UI.aiChatBox.appendChild(msg);
+        UI.aiChatBox.scrollTop = UI.aiChatBox.scrollHeight;
+    }
+
+    function toggleAI(show) {
+        playSound('click');
+        if (show) UI.aiModal.classList.remove('hidden');
+        else UI.aiModal.classList.add('hidden');
+    }
+
+    // =================================================================================
+    // 4. UTILITIES
     // =================================================================================
 
     function playSound(type) {
         const s = UI.sounds[type];
         if (s) {
             s.currentTime = 0;
-            s.play().catch(e => console.log("Audio play blocked"));
+            s.play().catch(() => {});
         }
     }
 
-    function setAmbient(type) {
-        const s = UI.sounds.ambient;
-        const urls = {
-            rain: "https://www.soundjay.com/nature/rain-01.mp3",
-            library: "https://www.soundjay.com/misc/sounds/library-ambience-1.mp3",
-            fire: "https://www.soundjay.com/nature/fire-1.mp3"
-        };
-
-        if (type === 'none') {
-            stopAmbient();
-            return;
-        }
-
-        s.src = urls[type];
-        s.play();
-        document.querySelectorAll('.s-chip').forEach(c => c.classList.remove('active'));
-        document.querySelector(`[data-sound="${type}"]`).classList.add('active');
-    }
-
-    function stopAmbient() {
-        UI.sounds.ambient.pause();
-        document.querySelectorAll('.s-chip').forEach(c => c.classList.remove('active'));
-        document.querySelector(`[data-sound="none"]`).classList.add('active');
-    }
-
-    function updateActiveCount() {
-        UI.activeCount.textContent = AppState.activeNow;
-    }
-
-    function simulateActivity() {
-        // Randomly show 1-3 people studying to make it feel alive
-        AppState.activeNow = Math.floor(Math.random() * 4);
-        updateActiveCount();
-    }
-
-    function setupEventListeners() {
-        // Focus Trigger
-        UI.subjectsGrid.addEventListener('click', (e) => {
-            const btn = e.target.closest('.focus-trigger');
-            if (btn) openFocusModal(btn.dataset.subject);
-        });
-
-        // Modal Controls
-        UI.focusModal.startBtn.onclick = startFocusSession;
-        UI.focusModal.pauseBtn.onclick = () => {
-            AppState.focusSession.isPaused = !AppState.focusSession.isPaused;
-            UI.focusModal.pauseBtn.innerHTML = AppState.focusSession.isPaused ? 
-                '<i class="fas fa-play"></i> استئناف' : '<i class="fas fa-pause"></i> استراحة';
+    function setupThemeToggle() {
+        document.querySelector('.theme-toggle').onclick = () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            document.querySelector('.theme-toggle i').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
             playSound('click');
         };
-        UI.focusModal.stopBtn.onclick = () => endFocusSession(false);
-        UI.focusModal.closeBtn.onclick = () => {
-            if (AppState.focusSession.isActive) {
-                if (confirm("هل تريد حقاً إغلاق الجلسة؟ سيتم حفظ الوقت المنقضي فقط.")) {
-                    endFocusSession(false);
-                }
-            } else {
-                UI.focusModal.overlay.classList.add('hidden');
-            }
-        };
-
-        // Shuffle
-        document.getElementById('shuffle-btn').onclick = () => {
-            if (confirm("هل تريد إعادة توزيع المواد على النواب بشكل عشوائي؟")) {
-                playSound('click');
-                shuffleAssignments();
-                renderSubjects();
-            }
-        };
-
-        // Ambient Sounds
-        document.querySelectorAll('.s-chip').forEach(chip => {
-            chip.onclick = () => setAmbient(chip.dataset.sound);
-        });
-
-        // Navigation (Visual only for now)
-        document.querySelectorAll('.side-nav-links li, .m-nav-item').forEach(li => {
-            li.onclick = () => {
-                playSound('click');
-                document.querySelectorAll('.side-nav-links li, .m-nav-item').forEach(el => el.classList.remove('active'));
-                li.classList.add('active');
-            };
-        });
     }
 
     // Run App
