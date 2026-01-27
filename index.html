@@ -3,251 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>المتوقد OS | المنصة القانونية المتكاملة</title>
+    <title>المتوقد OS | النسخة الكونية الخارقة</title>
     
-    <!-- Fonts -->
+    <!-- Fonts: Premium Selection -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@200;400;700;900&display=swap" rel="stylesheet">
     
-    <!-- Icons & Libraries -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Icons & Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="os-theme">
-    <!-- Background Engine -->
-    <div class="os-background">
-        <div class="mesh-gradient"></div>
-        <div class="floating-particles" id="particles"></div>
+<body class="cosmic-theme">
+    <!-- Cosmic Background Engine -->
+    <div class="cosmic-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="aurora"></div>
     </div>
 
-    <div class="os-container">
-        <!-- Sidebar Navigation -->
-        <aside class="os-sidebar">
-            <div class="os-logo">
-                <div class="logo-box"><i class="fas fa-scale-balanced"></i></div>
-                <div class="logo-text">المتوقد<span>OS</span></div>
-            </div>
-            
-            <nav class="os-nav">
-                <div class="nav-group">
-                    <label>الرئيسية</label>
-                    <li class="nav-item active" data-target="dashboard"><i class="fas fa-house-chimney"></i> <span>لوحة التحكم</span></li>
-                    <li class="nav-item" data-target="library"><i class="fas fa-book-bookmark"></i> <span>المكتبة الذكية</span></li>
+    <!-- OS Shell -->
+    <div class="os-shell">
+        <!-- Sidebar: The Command Center -->
+        <aside class="sidebar-cosmic">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-atom fa-spin-slow"></i>
                 </div>
-                
-                <div class="nav-group">
-                    <label>التعلم والإنتاجية</label>
-                    <li class="nav-item" data-target="study-tools"><i class="fas fa-microchip"></i> <span>أدوات الدراسة</span></li>
-                    <li class="nav-item" data-target="exams"><i class="fas fa-file-signature"></i> <span>محاكي الامتحانات</span></li>
-                    <li class="nav-item" data-target="flashcards"><i class="fas fa-clone"></i> <span>البطاقات الذكية</span></li>
+                <div class="brand-name">المتوقد<span>OS</span></div>
+            </div>
+
+            <nav class="main-nav">
+                <div class="nav-section">
+                    <span class="section-label">القيادة</span>
+                    <div class="nav-item active" data-page="dashboard">
+                        <i class="fas fa-th-large"></i> <span>الرئيسية</span>
+                    </div>
+                    <div class="nav-item" data-page="library">
+                        <i class="fas fa-book-atlas"></i> <span>المكتبة المغربية</span>
+                    </div>
                 </div>
 
-                <div class="nav-group">
-                    <label>المجتمع والمهنة</label>
-                    <li class="nav-item" data-target="community"><i class="fas fa-users-rectangle"></i> <span>مجتمع المتوقد</span></li>
-                    <li class="nav-item" data-target="career"><i class="fas fa-briefcase"></i> <span>المسار المهني</span></li>
-                    <li class="nav-item" data-target="news"><i class="fas fa-newspaper"></i> <span>أخبار القانون</span></li>
+                <div class="nav-section">
+                    <span class="section-label">الأدوات الذكية</span>
+                    <div class="nav-item" data-page="ai-lab">
+                        <i class="fas fa-brain"></i> <span>مختبر الذكاء</span>
+                    </div>
+                    <div class="nav-item" data-page="exam-sim">
+                        <i class="fas fa-vial"></i> <span>محاكي الامتحانات</span>
+                    </div>
+                    <div class="nav-item" data-page="flashcards">
+                        <i class="fas fa-layer-group"></i> <span>البطاقات الذكية</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <span class="section-label">المجتمع</span>
+                    <div class="nav-item" data-page="community">
+                        <i class="fas fa-globe-africa"></i> <span>مجتمع المتوقد</span>
+                    </div>
+                    <div class="nav-item" data-page="career">
+                        <i class="fas fa-user-tie"></i> <span>المسار المهني</span>
+                    </div>
                 </div>
             </nav>
 
-            <div class="os-sidebar-footer">
-                <div class="user-profile-mini">
-                    <img src="https://ui-avatars.com/api/?name=Mohamed+Elhaddouny&background=c9a227&color=fff" alt="User">
-                    <div class="u-info">
-                        <span class="u-name">محمد الهدوني</span>
-                        <span class="u-rank">مشرف المنصة</span>
+            <div class="sidebar-footer">
+                <div class="user-card-premium">
+                    <div class="avatar-wrapper">
+                        <img src="https://ui-avatars.com/api/?name=Mohamed+Elhaddouny&background=c9a227&color=fff&bold=true" alt="Mohamed">
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="user-meta">
+                        <span class="user-name">محمد الهدوني</span>
+                        <span class="user-badge">المشرف الأعلى</span>
                     </div>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Viewport -->
-        <main class="os-main">
-            <!-- Global Header -->
-            <header class="os-header">
-                <div class="header-left">
-                    <div class="search-bar-os">
-                        <i class="fas fa-magnifying-glass"></i>
-                        <input type="text" placeholder="ابحث في القوانين، الدروس، أو الأعضاء...">
-                    </div>
+        <!-- Main Content Area -->
+        <main class="main-cosmic">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-engine">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="ابحث في القوانين المغربية، الدروس، أو المراجع...">
+                    <span class="search-shortcut">⌘ K</span>
                 </div>
-                <div class="header-right">
-                    <div class="os-action-btns">
-                        <button class="os-icon-btn" id="ai-assistant-trigger" title="مساعد الذكاء الاصطناعي"><i class="fas fa-robot"></i></button>
-                        <button class="os-icon-btn" id="notifications-trigger"><i class="fas fa-bell"></i><span class="notif-badge">3</span></button>
-                        <button class="os-icon-btn theme-toggle"><i class="fas fa-moon"></i></button>
+                <div class="top-actions">
+                    <div class="action-btn" id="ai-trigger" title="المساعد الذكي">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="action-btn" id="notif-trigger">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-dot"></span>
+                    </div>
+                    <div class="action-btn theme-switcher">
+                        <i class="fas fa-wand-magic-sparkles"></i>
                     </div>
                 </div>
             </header>
 
-            <!-- Dynamic Content Sections -->
-            <div class="os-content-area">
+            <!-- Dynamic Pages Container -->
+            <div class="content-viewport">
                 
-                <!-- SECTION: DASHBOARD -->
-                <section id="page-dashboard" class="os-page active">
-                    <div class="welcome-banner">
-                        <div class="banner-text">
-                            <h1>مرحباً بك في مستقبل التعلم القانوني</h1>
-                            <p>لديك 3 دروس متبقية لإكمال خطة اليوم. استمر في التقدم!</p>
-                        </div>
-                        <div class="banner-stats">
-                            <div class="b-stat"><span>12</span><label>يوم متتالي</label></div>
-                            <div class="b-stat"><span>85%</span><label>معدل الإنجاز</label></div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-grid">
-                        <!-- Focus Mode Card -->
-                        <div class="os-card focus-card-mini">
-                            <div class="card-header"><h3><i class="fas fa-stopwatch"></i> وضع التركيز</h3></div>
-                            <div class="focus-timer-mini">
-                                <span id="mini-timer">25:00</span>
-                                <button class="btn-os-primary" id="start-focus-quick">ابدأ الآن</button>
-                            </div>
-                        </div>
-
-                        <!-- Leaderboard Mini -->
-                        <div class="os-card leaderboard-mini">
-                            <div class="card-header"><h3><i class="fas fa-trophy"></i> المتصدرون</h3></div>
-                            <div class="leader-list" id="mini-leaderboard">
-                                <!-- Injected by JS -->
-                            </div>
-                        </div>
-
-                        <!-- Smart Planner Mini -->
-                        <div class="os-card planner-mini">
-                            <div class="card-header"><h3><i class="fas fa-calendar-check"></i> خطة المراجعة</h3></div>
-                            <div class="planner-items" id="mini-planner">
-                                <!-- Injected by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECTION: LIBRARY -->
-                <section id="page-library" class="os-page">
-                    <div class="section-title">
-                        <h2>المكتبة القانونية الذكية</h2>
-                        <p>قاعدة بيانات شاملة للقوانين والملخصات بلغة مبسطة.</p>
-                    </div>
-                    <div class="library-filters">
-                        <button class="filter-btn active">الكل</button>
-                        <button class="filter-btn">القانون المدني</button>
-                        <button class="filter-btn">القانون الجنائي</button>
-                        <button class="filter-btn">ملخصات الطلاب</button>
-                    </div>
-                    <div class="library-grid" id="library-container">
-                        <!-- Library items injected here -->
-                    </div>
-                </section>
-
-                <!-- SECTION: STUDY TOOLS -->
-                <section id="page-study-tools" class="os-page">
-                    <div class="tools-grid">
-                        <div class="tool-box glass-card" data-tool="ai-summarizer">
-                            <i class="fas fa-wand-magic-sparkles"></i>
-                            <h3>ملخص الذكاء الاصطناعي</h3>
-                            <p>حول الدروس الطويلة إلى نقاط مركزة فوراً.</p>
-                        </div>
-                        <div class="tool-box glass-card" data-tool="voice-notes">
-                            <i class="fas fa-microphone-lines"></i>
-                            <h3>الملاحظات الصوتية</h3>
-                            <p>استمع لشروحات الدروس أثناء التنقل.</p>
-                        </div>
-                        <div class="tool-box glass-card" data-tool="term-simplifier">
-                            <i class="fas fa-spell-check"></i>
-                            <h3>مبسط المصطلحات</h3>
-                            <p>افهم المصطلحات المعقدة بضغطة زر.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECTION: EXAMS -->
-                <section id="page-exams" class="os-page">
-                    <div class="exam-simulator-header">
-                        <h2>محاكي الامتحانات الجامعية</h2>
-                        <button class="btn-os-gold" id="start-exam-sim">بدء محاكاة جديدة</button>
-                    </div>
-                    <div class="exam-stats-grid">
-                        <div class="e-stat-card"><h4>آخر نتيجة</h4><span>16/20</span></div>
-                        <div class="e-stat-card"><h4>نقاط الضعف</h4><span class="tag-red">المسؤولية التقصيرية</span></div>
-                    </div>
-                    <div class="previous-exams" id="exams-list">
-                        <!-- Exams injected here -->
-                    </div>
-                </section>
-
-                <!-- SECTION: FLASHCARDS -->
-                <section id="page-flashcards" class="os-page">
-                    <div class="flashcard-container">
-                        <div class="flashcard" id="current-flashcard">
-                            <div class="card-front"><h3>السؤال القانوني؟</h3></div>
-                            <div class="card-back"><p>الإجابة القانونية المبسطة هنا...</p></div>
-                        </div>
-                        <div class="flashcard-controls">
-                            <button class="fc-btn prev"><i class="fas fa-arrow-right"></i></button>
-                            <button class="fc-btn flip"><i class="fas fa-rotate"></i> اقلب</button>
-                            <button class="fc-btn next"><i class="fas fa-arrow-left"></i></button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECTION: COMMUNITY -->
-                <section id="page-community" class="os-page">
-                    <div class="community-layout">
-                        <div class="feed-area">
-                            <div class="post-box glass-card">
-                                <textarea placeholder="شارك تجربة قانونية أو اطرح سؤالاً..."></textarea>
-                                <div class="post-actions">
-                                    <button><i class="fas fa-image"></i></button>
-                                    <button class="btn-os-primary">نشر</button>
+                <!-- PAGE: DASHBOARD (Bento Grid Style) -->
+                <section id="page-dashboard" class="page active">
+                    <div class="bento-grid">
+                        <!-- Welcome Tile -->
+                        <div class="bento-tile welcome-tile span-2">
+                            <div class="tile-content">
+                                <h1>أهلاً بك في عصر القانون الرقمي</h1>
+                                <p>أنت الآن تستخدم أقوى منصة تعليمية قانونية في المغرب. ذكاء اصطناعي، مكتبة شاملة، ومجتمع متفاعل.</p>
+                                <div class="tile-actions">
+                                    <button class="btn-premium">ابدأ المذاكرة</button>
+                                    <button class="btn-glass">خطة اليوم</button>
                                 </div>
                             </div>
-                            <div class="community-feed" id="main-feed">
-                                <!-- Posts injected here -->
+                            <div class="tile-visual">
+                                <i class="fas fa-shield-halved"></i>
                             </div>
                         </div>
-                        <div class="sidebar-area">
-                            <div class="os-card">
-                                <h3><i class="fas fa-comments"></i> غرف المذاكرة</h3>
-                                <div class="room-list">
-                                    <div class="room-item"><span># القانون_الجنائي</span><label>12 نشط</label></div>
-                                    <div class="room-item"><span># الالتزامات</span><label>8 نشط</label></div>
+
+                        <!-- Focus Tile -->
+                        <div class="bento-tile focus-tile">
+                            <div class="tile-header">
+                                <h3><i class="fas fa-hourglass-half"></i> وضع التركيز</h3>
+                            </div>
+                            <div class="timer-display">
+                                <span id="timer-val">60:00</span>
+                            </div>
+                            <div class="timer-controls">
+                                <button id="timer-toggle"><i class="fas fa-play"></i></button>
+                                <select id="ambient-sound">
+                                    <option value="none">بدون صوت</option>
+                                    <option value="rain">صوت المطر</option>
+                                    <option value="library">مكتبة هادئة</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Leaderboard Tile -->
+                        <div class="bento-tile leaderboard-tile">
+                            <div class="tile-header">
+                                <h3><i class="fas fa-crown"></i> فرسان المتوقد</h3>
+                            </div>
+                            <div class="leader-list" id="leaderboard-injected">
+                                <!-- JS Injection -->
+                            </div>
+                        </div>
+
+                        <!-- Stats Tile -->
+                        <div class="bento-tile stats-tile">
+                            <div class="tile-header"><h3><i class="fas fa-chart-line"></i> نشاطك</h3></div>
+                            <div class="stats-container">
+                                <div class="stat-item">
+                                    <label>النقاط</label>
+                                    <span>2,450</span>
+                                </div>
+                                <div class="stat-item">
+                                    <label>المستوى</label>
+                                    <span>قاضٍ متدرب</span>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- News Tile -->
+                        <div class="bento-tile news-tile span-2">
+                            <div class="tile-header"><h3><i class="fas fa-newspaper"></i> آخر المستجدات القانونية بالمغرب</h3></div>
+                            <div class="news-feed" id="news-injected">
+                                <!-- JS Injection -->
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                <!-- SECTION: CAREER -->
-                <section id="page-career" class="os-page">
-                    <div class="career-paths">
-                        <div class="path-card glass-card">
-                            <div class="path-icon"><i class="fas fa-gavel"></i></div>
-                            <h3>سلك القضاء</h3>
-                            <ul class="path-steps">
-                                <li>إجازة في القانون</li>
-                                <li>مباراة الملحقين القضائيين</li>
-                                <li>تكوين بالمعهد العالي للقضاء</li>
-                            </ul>
-                        </div>
-                        <div class="path-card glass-card">
-                            <div class="path-icon"><i class="fas fa-user-tie"></i></div>
-                            <h3>مهنة المحاماة</h3>
-                            <ul class="path-steps">
-                                <li>إجازة في القانون</li>
-                                <li>شهادة الأهلية للمحاماة</li>
-                                <li>فترة التمرين (3 سنوات)</li>
-                            </ul>
+                <!-- PAGE: LIBRARY (The Moroccan Vault) -->
+                <section id="page-library" class="page">
+                    <div class="library-header">
+                        <h2>الخزانة القانونية المغربية</h2>
+                        <div class="lib-tabs">
+                            <button class="lib-tab active" data-semester="all">الكل</button>
+                            <button class="lib-tab" data-semester="s1">S1</button>
+                            <button class="lib-tab" data-semester="s2">S2</button>
+                            <button class="lib-tab" data-semester="s3">S3</button>
+                            <button class="lib-tab" data-semester="s4">S4</button>
+                            <button class="lib-tab" data-semester="s5">S5</button>
+                            <button class="lib-tab" data-semester="s6">S6</button>
                         </div>
                     </div>
-                    <div class="doc-templates">
-                        <h3><i class="fas fa-file-contract"></i> نماذج وثائق قانونية</h3>
-                        <div class="templates-grid" id="templates-container">
-                            <!-- Templates injected here -->
+                    <div class="library-grid" id="library-injected">
+                        <!-- JS Injection -->
+                    </div>
+                </section>
+
+                <!-- PAGE: AI LAB -->
+                <section id="page-ai-lab" class="page">
+                    <div class="ai-lab-container">
+                        <div class="ai-sidebar">
+                            <h3>أدوات الذكاء</h3>
+                            <div class="ai-tool active" data-mode="explain">تبسيط المفاهيم</div>
+                            <div class="ai-tool" data-mode="summarize">تلخيص النصوص</div>
+                            <div class="ai-tool" data-mode="analyze">تحليل القضايا</div>
+                        </div>
+                        <div class="ai-chat-interface">
+                            <div class="chat-messages" id="ai-messages">
+                                <div class="msg ai">مرحباً بك في مختبر الذكاء القانوني. أنا مدعوم بـ GPT-4 ومبرمج لفهم القانون المغربي. كيف أساعدك؟</div>
+                            </div>
+                            <div class="chat-input-area">
+                                <textarea id="ai-input" placeholder="اكتب سؤالك القانوني هنا..."></textarea>
+                                <button id="ai-send"><i class="fas fa-paper-plane"></i></button>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -256,36 +225,22 @@
         </main>
     </div>
 
-    <!-- AI ASSISTANT MODAL -->
-    <div id="ai-modal" class="os-modal hidden">
-        <div class="ai-chat-container">
-            <div class="ai-header">
-                <i class="fas fa-robot"></i>
-                <span>مساعد المتوقد الذكي</span>
-                <button class="close-ai"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="ai-messages" id="ai-chat-box">
-                <div class="msg ai">مرحباً! أنا مساعدك القانوني الذكي. كيف يمكنني تبسيط الدروس لك اليوم؟</div>
-            </div>
-            <div class="ai-input">
-                <input type="text" id="ai-user-input" placeholder="اسأل عن أي مفهوم قانوني...">
-                <button id="send-ai-msg"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
+    <!-- Global Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
 
-    <!-- MOBILE NAVIGATION -->
-    <nav class="os-mobile-nav">
-        <div class="m-nav-item active" data-target="dashboard"><i class="fas fa-house"></i></div>
-        <div class="m-nav-item" data-target="library"><i class="fas fa-book"></i></div>
-        <div class="m-nav-item center" id="quick-ai-btn"><i class="fas fa-robot"></i></div>
-        <div class="m-nav-item" data-target="community"><i class="fas fa-users"></i></div>
-        <div class="m-nav-item" data-target="study-tools"><i class="fas fa-gear"></i></div>
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-nav">
+        <div class="m-nav-item active" data-page="dashboard"><i class="fas fa-house"></i></div>
+        <div class="m-nav-item" data-page="library"><i class="fas fa-book"></i></div>
+        <div class="m-nav-item center" id="m-ai-trigger"><i class="fas fa-robot"></i></div>
+        <div class="m-nav-item" data-page="community"><i class="fas fa-users"></i></div>
+        <div class="m-nav-item" data-page="ai-lab"><i class="fas fa-brain"></i></div>
     </nav>
 
-    <!-- Audio Elements -->
-    <audio id="snd-os-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
-    <audio id="snd-os-notif" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+    <!-- Audio Engine -->
+    <audio id="snd-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+    <audio id="snd-success" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3" preload="auto"></audio>
+    <audio id="snd-ambient-rain" src="https://www.soundjay.com/nature/rain-01.mp3" loop></audio>
 
     <script src="script.js"></script>
 </body>
