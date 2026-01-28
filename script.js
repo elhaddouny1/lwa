@@ -1,76 +1,60 @@
 /**
- * MOTAWAQED OS - COSMIC ENGINE (ULTRA-PREMIUM)
- * The most advanced legal learning engine in Morocco.
+ * MOTAWAQED OS - LEGENDARY ENGINE (2026)
+ * The most powerful legal learning engine ever built.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // =================================================================================
-    // 1. COSMIC STATE & DATA (The Moroccan Vault)
-    // =================================================================================
-    const CosmicState = {
+    const LegendaryState = {
         currentPage: 'dashboard',
-        user: { name: "محمد الهدوني", rank: "المشرف الأعلى", points: 2450, level: "قاضٍ متدرب" },
-        
+        user: { name: "محمد الهدوني", rank: "المشرف الأسطوري", points: 2500, level: "S6" },
         aiConfig: {
             apiKey: "sk-fyKI2GzpBr2WXOyv85On6xUmoqFOIOKu40ZPD3EV14y73NJQ65P7Hw7sMJ0JYWL4VcG5mar3kTnEbCp5JGN4oe000OP6",
-            model: "gpt-3.5-turbo"
+            model: "gpt-4o"
         },
-
-        // Moroccan Law Library Data (S1-S6)
         library: [
-            { id: 1, s: "s1", title: "المدخل لعلوم القانون", cat: "القانون العام", desc: "الأسس النظرية للقاعدة القانونية وخصائصها.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s1.html" },
-            { id: 2, s: "s1", title: "المدخل للعلوم السياسية", cat: "العلوم السياسية", desc: "دراسة الدولة، السلطة، والأنظمة السياسية.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s1.html" },
-            { id: 3, s: "s2", title: "القانون الجنائي العام", cat: "القانون الخاص", desc: "دراسة الجريمة، المجرم، والعقوبة في التشريع المغربي.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s2.html" },
-            { id: 4, s: "s2", title: "النظرية العامة للالتزامات", cat: "القانون المدني", desc: "محور القانون الخاص: العقد، الإرادة المنفردة، والمسؤولية.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s2.html" },
-            { id: 5, s: "s3", title: "قانون الأسرة المغربي", cat: "الأحوال الشخصية", desc: "شرح مدونة الأسرة: الزواج، الطلاق، والولادة.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s3.html" },
-            { id: 6, s: "s4", title: "القانون الجنائي الخاص", cat: "القانون الخاص", desc: "دراسة الجرائم المحددة: القتل، السرقة، والنصب.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s4.html" },
-            { id: 7, s: "s5", title: "المسطرة الجنائية", cat: "الإجراءات", desc: "قواعد البحث التمهيدي، التحقيق، والمحاكمة.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s5.html" },
-            { id: 8, s: "s6", title: "القانون الدولي الخاص", cat: "القانون الدولي", desc: "تنازع القوانين وتنازع الاختصاص القضائي الدولي.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s6.html" }
+            { id: 1, s: "s1", title: "المدخل لدراسة القانون", cat: "نظري", desc: "القاعدة القانونية، مصادر القانون، وتطبيق القانون من حيث الزمان والمكان.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s1.html" },
+            { id: 2, s: "s2", title: "القانون الجنائي العام", cat: "جنائي", desc: "الجريمة، المسؤولية الجنائية، والعقوبات في التشريع المغربي الحديث.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s2.html" },
+            { id: 3, s: "s2", title: "قانون الالتزامات والعقود", cat: "مدني", desc: "النظرية العامة للالتزام: العقد، الإرادة المنفردة، والعمل غير المشروع.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s2.html" },
+            { id: 4, s: "s3", title: "مدونة الأسرة المغربية", cat: "أحوال شخصية", desc: "الزواج، انحلال ميثاق الزوجية، والولادة ونتائجها وفق آخر التعديلات.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s3.html" },
+            { id: 5, s: "s4", title: "القانون الجنائي الخاص", cat: "جنائي", desc: "دراسة الجرائم الواقعة على الأشخاص والأموال ونظام التبرير.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s4.html" },
+            { id: 6, s: "s5", title: "المسطرة الجنائية الجديدة", cat: "إجراءات", desc: "قانون 03.23 الجديد: البحث التمهيدي، التحقيق، وضمانات المحاكمة العادلة.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s5.html" },
+            { id: 7, s: "s6", title: "المسطرة المدنية", cat: "إجراءات", desc: "الدعوى، الاختصاص، طرق الطعن، والتنفيذ الجبري للأحكام.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s6.html" },
+            { id: 8, s: "s6", title: "القانون العقاري", cat: "عقاري", desc: "التحفيظ العقاري، الحقوق العينية، والضمانات العقارية بالمغرب.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s6.html" }
         ],
-
         leaderboard: [
-            { name: "إيمان العلمي", pts: 4850, rank: "محامية نقض" },
-            { name: "ياسين بناني", pts: 4220, rank: "وكيل الملك" },
-            { name: "ليلى التازي", pts: 3900, rank: "مستشارة قانونية" }
+            { name: "محمد الهدوني", pts: 2500, rank: "المشرف الأسطوري" },
+            { name: "سارة الإدريسي", pts: 2100, rank: "قاضية من الدرجة الأولى" },
+            { name: "أمين الفاسي", pts: 1850, rank: "محامي بهيئة الرباط" }
         ],
-
         news: [
-            { title: "تعديلات مرتقبة في مدونة الأسرة المغربية 2026", date: "منذ ساعتين" },
-            { title: "رقمنة المحاكم: إطلاق منصة المحامي للتبادل الإلكتروني", date: "منذ يوم" },
-            { title: "صدور ظهير شريف بتنفيذ قانون المالية الجديد", date: "منذ 3 أيام" }
+            { title: "دخول قانون المسطرة الجنائية الجديد 03.23 حيز التنفيذ", date: "اليوم" },
+            { title: "مشروع قانون رقم 37.24 يحال على لجنة العدل والتشريع", date: "أمس" },
+            { title: "تعديلات جوهرية في مدونة التجارة المغربية لعام 2026", date: "منذ يومين" }
         ],
-
-        timer: {
-            seconds: 3600,
-            isRunning: false,
-            interval: null
-        }
+        timer: { seconds: 3600, isRunning: false, interval: null }
     };
 
-    // DOM Elements
     const UI = {
-        navItems: document.querySelectorAll('.nav-item, .m-nav-item'),
+        navLinks: document.querySelectorAll('.nav-link, .m-link'),
         pages: document.querySelectorAll('.page'),
-        libGrid: document.getElementById('library-injected'),
-        libTabs: document.querySelectorAll('.lib-tab'),
-        leaderboard: document.getElementById('leaderboard-injected'),
-        news: document.getElementById('news-injected'),
-        timerVal: document.getElementById('timer-val'),
-        timerToggle: document.getElementById('timer-toggle'),
-        aiInput: document.getElementById('ai-input'),
-        aiMessages: document.getElementById('ai-messages'),
-        aiSend: document.getElementById('ai-send'),
+        libContainer: document.getElementById('library-data'),
+        libFilters: document.querySelectorAll('.s-btn'),
+        leaderboard: document.getElementById('leaderboard-data'),
+        news: document.getElementById('news-data'),
+        timerDisplay: document.getElementById('timer-display'),
+        timerProgress: document.getElementById('timer-progress'),
+        timerStart: document.getElementById('timer-start'),
+        aiQuery: document.getElementById('ai-query'),
+        aiChatFlow: document.getElementById('ai-chat-flow'),
+        aiSubmit: document.getElementById('ai-submit'),
+        dynamicGlow: document.querySelector('.dynamic-glow'),
         sounds: {
-            click: document.getElementById('snd-click'),
-            success: document.getElementById('snd-success'),
-            rain: document.getElementById('snd-ambient-rain')
+            click: document.getElementById('audio-click'),
+            success: document.getElementById('audio-success'),
+            rain: document.getElementById('audio-rain')
         }
     };
-
-    // =================================================================================
-    // 2. INITIALIZATION
-    // =================================================================================
 
     function init() {
         setupNavigation();
@@ -78,161 +62,142 @@ document.addEventListener('DOMContentLoaded', () => {
         renderLibrary('all');
         setupTimer();
         setupAI();
-        setupThemeSwitcher();
-        
-        // Success sound on load
-        setTimeout(() => playSound('success'), 1500);
+        setupVisualEffects();
+        setTimeout(() => playSound('success'), 1000);
     }
 
-    // =================================================================================
-    // 3. CORE ENGINES
-    // =================================================================================
-
     function setupNavigation() {
-        UI.navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const target = item.dataset.page;
+        UI.navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const target = link.dataset.page;
                 if (!target) return;
-
                 playSound('click');
-
-                // Update UI
-                UI.navItems.forEach(i => i.classList.remove('active'));
-                document.querySelectorAll(`[data-page="${target}"]`).forEach(i => i.classList.add('active'));
-
+                UI.navLinks.forEach(l => l.classList.remove('active'));
+                document.querySelectorAll(`[data-page="${target}"]`).forEach(l => l.classList.add('active'));
                 UI.pages.forEach(p => p.classList.remove('active'));
                 document.getElementById(`page-${target}`).classList.add('active');
-
-                CosmicState.currentPage = target;
+                LegendaryState.currentPage = target;
             });
         });
     }
 
     function renderDashboard() {
-        // Leaderboard
-        UI.leaderboard.innerHTML = CosmicState.leaderboard.map((u, i) => `
-            <div class="leader-item animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
-                <div class="l-rank">#${i + 1}</div>
-                <div class="l-info">
+        UI.leaderboard.innerHTML = LegendaryState.leaderboard.map((u, i) => `
+            <div class="leader-row animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
+                <div class="l-pos">${i + 1}</div>
+                <div class="l-user">
                     <span class="l-name">${u.name}</span>
-                    <span class="l-title">${u.rank}</span>
+                    <span class="l-rank">${u.rank}</span>
                 </div>
                 <div class="l-pts">${u.pts}</div>
             </div>
         `).join('');
 
-        // News
-        UI.news.innerHTML = CosmicState.news.map(n => `
-            <div class="news-item">
-                <i class="fas fa-bolt"></i>
-                <div class="n-content">
-                    <p>${n.title}</p>
-                    <small>${n.date}</small>
+        UI.news.innerHTML = LegendaryState.news.map(n => `
+            <div class="news-card">
+                <div class="n-icon"><i class="fas fa-gavel"></i></div>
+                <div class="n-body">
+                    <h4>${n.title}</h4>
+                    <span><i class="far fa-clock"></i> ${n.date}</span>
                 </div>
             </div>
         `).join('');
     }
 
-    function renderLibrary(semester) {
-        const filtered = semester === 'all' 
-            ? CosmicState.library 
-            : CosmicState.library.filter(item => item.s === semester);
-
-        UI.libGrid.innerHTML = filtered.map(item => `
-            <div class="law-card animate__animated animate__fadeInUp">
-                <span class="badge">${item.cat}</span>
+    function renderLibrary(s) {
+        const filtered = s === 'all' ? LegendaryState.library : LegendaryState.library.filter(item => item.s === s);
+        UI.libContainer.innerHTML = filtered.map(item => `
+            <div class="law-vault-card animate__animated animate__zoomIn">
+                <div class="v-header">
+                    <span class="v-tag">${item.cat}</span>
+                    <span class="v-sem">${item.s.toUpperCase()}</span>
+                </div>
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
-                <div class="card-footer">
-                    <span class="s-tag">${item.s.toUpperCase()}</span>
-                    <a href="${item.link}" target="_blank" class="btn-download">تحميل PDF <i class="fas fa-download"></i></a>
+                <div class="v-footer">
+                    <a href="${item.link}" target="_blank" class="v-btn">فتح المرجع <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
         `).join('');
     }
 
-    UI.libTabs.forEach(tab => {
-        tab.onclick = () => {
-            UI.libTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            renderLibrary(tab.dataset.semester);
+    UI.libFilters.forEach(btn => {
+        btn.onclick = () => {
+            UI.libFilters.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderLibrary(btn.dataset.s);
             playSound('click');
         };
     });
 
-    // --- TIMER ENGINE ---
     function setupTimer() {
-        UI.timerToggle.onclick = () => {
-            CosmicState.timer.isRunning = !CosmicState.timer.isRunning;
-            UI.timerToggle.innerHTML = CosmicState.timer.isRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        UI.timerStart.onclick = () => {
+            LegendaryState.timer.isRunning = !LegendaryState.timer.isRunning;
+            UI.timerStart.innerHTML = LegendaryState.timer.isRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
             playSound('click');
-
-            if (CosmicState.timer.isRunning) {
-                CosmicState.timer.interval = setInterval(updateTimer, 1000);
-                handleAmbientSound(true);
+            if (LegendaryState.timer.isRunning) {
+                LegendaryState.timer.interval = setInterval(updateTimer, 1000);
+                handleAmbient(true);
             } else {
-                clearInterval(CosmicState.timer.interval);
-                handleAmbientSound(false);
+                clearInterval(LegendaryState.timer.interval);
+                handleAmbient(false);
             }
         };
     }
 
     function updateTimer() {
-        if (CosmicState.timer.seconds <= 0) {
-            clearInterval(CosmicState.timer.interval);
+        if (LegendaryState.timer.seconds <= 0) {
+            clearInterval(LegendaryState.timer.interval);
             playSound('success');
-            alert("أحسنت! لقد أكملت ساعة من التركيز.");
+            alert("تمت المهمة! لقد أكملت ساعة من التركيز الأسطوري.");
             return;
         }
-        CosmicState.timer.seconds--;
-        const mins = Math.floor(CosmicState.timer.seconds / 60);
-        const secs = CosmicState.timer.seconds % 60;
-        UI.timerVal.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        LegendaryState.timer.seconds--;
+        const mins = Math.floor(LegendaryState.timer.seconds / 60);
+        const secs = LegendaryState.timer.seconds % 60;
+        UI.timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        const offset = 283 - (LegendaryState.timer.seconds / 3600) * 283;
+        UI.timerProgress.style.strokeDashoffset = offset;
     }
 
-    function handleAmbientSound(play) {
-        const soundType = document.getElementById('ambient-sound').value;
-        if (soundType === 'rain') {
+    function handleAmbient(play) {
+        const type = document.getElementById('ambient-engine').value;
+        if (type === 'rain') {
             if (play) UI.sounds.rain.play();
             else UI.sounds.rain.pause();
         }
     }
 
-    // --- AI LAB ENGINE ---
     function setupAI() {
-        const sendMessage = async () => {
-            const text = UI.aiInput.value.trim();
-            if (!text) return;
-
-            appendMessage('user', text);
-            UI.aiInput.value = '';
-
-            const loadingMsg = appendMessage('ai', 'جاري تحليل استفسارك القانوني...');
-
+        const askAI = async () => {
+            const query = UI.aiQuery.value.trim();
+            if (!query) return;
+            appendChat('user', query);
+            UI.aiQuery.value = '';
+            const loading = appendChat('bot', 'جاري استدعاء المحرك السيادي لتحليل طلبك...');
             try {
-                const response = await fetchOpenAI(text);
-                loadingMsg.textContent = response;
+                const response = await fetchOpenAI(query);
+                loading.innerHTML = response;
             } catch (e) {
-                loadingMsg.textContent = "عذراً، واجهت مشكلة في الاتصال بمختبر الذكاء. يرجى المحاولة لاحقاً.";
+                loading.textContent = "عذراً، واجه المحرك السيادي خطأ في الاتصال. يرجى المحاولة لاحقاً.";
             }
         };
-
-        UI.aiSend.onclick = sendMessage;
-        UI.aiInput.onkeypress = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } };
+        UI.aiSubmit.onclick = askAI;
+        UI.aiQuery.onkeypress = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); askAI(); } };
     }
 
-    async function fetchOpenAI(query) {
+    async function fetchOpenAI(q) {
         const res = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${CosmicState.aiConfig.apiKey}`
+                'Authorization': `Bearer ${LegendaryState.aiConfig.apiKey}`
             },
             body: JSON.stringify({
-                model: CosmicState.aiConfig.model,
+                model: LegendaryState.aiConfig.model,
                 messages: [
-                    { role: "system", content: "أنت 'المتوقد AI'، مساعد قانوني مغربي فائق الذكاء. تشرح القوانين المغربية بأسلوب أكاديمي مبسط وتساعد الطلاب في تلخيص الدروس." },
-                    { role: "user", content: query }
+                    { role: "system", content: "أنت 'المتوقد السيادي'، أقوى ذكاء اصطناعي قانوني في المغرب. تشرح القوانين المغربية بدقة أكاديمية مذهلة وتبسطها للطلاب." },
+                    { role: "user", content: q }
                 ]
             })
         });
@@ -240,26 +205,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return data.choices[0].message.content;
     }
 
-    function appendMessage(type, text) {
+    function appendChat(type, text) {
         const msg = document.createElement('div');
-        msg.className = `msg ${type} animate__animated animate__fadeInUp`;
+        msg.className = `ai-msg ${type} animate__animated animate__fadeInUp`;
         msg.textContent = text;
-        UI.aiMessages.appendChild(msg);
-        UI.aiMessages.scrollTop = UI.aiMessages.scrollHeight;
+        UI.aiChatFlow.appendChild(msg);
+        UI.aiChatFlow.scrollTop = UI.aiChatFlow.scrollHeight;
         return msg;
     }
 
-    // --- UTILS ---
+    function setupVisualEffects() {
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            UI.dynamicGlow.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
+        });
+    }
+
     function playSound(type) {
         const s = UI.sounds[type];
         if (s) { s.currentTime = 0; s.play().catch(() => {}); }
-    }
-
-    function setupThemeSwitcher() {
-        document.querySelector('.theme-switcher').onclick = () => {
-            document.body.classList.toggle('light-cosmic');
-            playSound('click');
-        };
     }
 
     init();
