@@ -1,6 +1,6 @@
 /**
  * MOTAWAQED OS - LEGENDARY ENGINE (2026)
- * The most powerful legal learning engine ever built.
+ * Optimized for Mobile & Desktop
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -63,7 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
         setupTimer();
         setupAI();
         setupVisualEffects();
-        setTimeout(() => playSound('success'), 1000);
+        
+        // Mobile Profile Button Mockup
+        const profileBtn = document.getElementById('m-profile-btn');
+        if (profileBtn) {
+            profileBtn.onclick = () => {
+                playSound('click');
+                alert(`المستخدم: ${LegendaryState.user.name}\nالرتبة: ${LegendaryState.user.rank}\nالنقاط: ${LegendaryState.user.points}`);
+            };
+        }
     }
 
     function setupNavigation() {
@@ -71,40 +79,56 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', () => {
                 const target = link.dataset.page;
                 if (!target) return;
+
                 playSound('click');
+
+                // Update UI State for both Desktop and Mobile navs
                 UI.navLinks.forEach(l => l.classList.remove('active'));
                 document.querySelectorAll(`[data-page="${target}"]`).forEach(l => l.classList.add('active'));
+
+                // Switch Pages
                 UI.pages.forEach(p => p.classList.remove('active'));
-                document.getElementById(`page-${target}`).classList.add('active');
+                const targetPage = document.getElementById(`page-${target}`);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    // Scroll to top on page change
+                    document.querySelector('.content-scroller').scrollTop = 0;
+                }
+
                 LegendaryState.currentPage = target;
             });
         });
     }
 
     function renderDashboard() {
-        UI.leaderboard.innerHTML = LegendaryState.leaderboard.map((u, i) => `
-            <div class="leader-row animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
-                <div class="l-pos">${i + 1}</div>
-                <div class="l-user">
-                    <span class="l-name">${u.name}</span>
-                    <span class="l-rank">${u.rank}</span>
+        if (UI.leaderboard) {
+            UI.leaderboard.innerHTML = LegendaryState.leaderboard.map((u, i) => `
+                <div class="leader-row animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
+                    <div class="l-pos">${i + 1}</div>
+                    <div class="l-user">
+                        <span class="l-name">${u.name}</span>
+                        <span class="l-rank">${u.rank}</span>
+                    </div>
+                    <div class="l-pts">${u.pts}</div>
                 </div>
-                <div class="l-pts">${u.pts}</div>
-            </div>
-        `).join('');
+            `).join('');
+        }
 
-        UI.news.innerHTML = LegendaryState.news.map(n => `
-            <div class="news-card">
-                <div class="n-icon"><i class="fas fa-gavel"></i></div>
-                <div class="n-body">
-                    <h4>${n.title}</h4>
-                    <span><i class="far fa-clock"></i> ${n.date}</span>
+        if (UI.news) {
+            UI.news.innerHTML = LegendaryState.news.map(n => `
+                <div class="news-card">
+                    <div class="n-icon"><i class="fas fa-gavel"></i></div>
+                    <div class="n-body">
+                        <h4>${n.title}</h4>
+                        <span><i class="far fa-clock"></i> ${n.date}</span>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 
     function renderLibrary(s) {
+        if (!UI.libContainer) return;
         const filtered = s === 'all' ? LegendaryState.library : LegendaryState.library.filter(item => item.s === s);
         UI.libContainer.innerHTML = filtered.map(item => `
             <div class="law-vault-card animate__animated animate__zoomIn">
@@ -131,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function setupTimer() {
+        if (!UI.timerStart) return;
         UI.timerStart.onclick = () => {
             LegendaryState.timer.isRunning = !LegendaryState.timer.isRunning;
             UI.timerStart.innerHTML = LegendaryState.timer.isRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
@@ -155,20 +180,27 @@ document.addEventListener('DOMContentLoaded', () => {
         LegendaryState.timer.seconds--;
         const mins = Math.floor(LegendaryState.timer.seconds / 60);
         const secs = LegendaryState.timer.seconds % 60;
-        UI.timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        const offset = 283 - (LegendaryState.timer.seconds / 3600) * 283;
-        UI.timerProgress.style.strokeDashoffset = offset;
+        if (UI.timerDisplay) {
+            UI.timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        if (UI.timerProgress) {
+            const offset = 283 - (LegendaryState.timer.seconds / 3600) * 283;
+            UI.timerProgress.style.strokeDashoffset = offset;
+        }
     }
 
     function handleAmbient(play) {
-        const type = document.getElementById('ambient-engine').value;
+        const ambientSelect = document.getElementById('ambient-engine');
+        if (!ambientSelect) return;
+        const type = ambientSelect.value;
         if (type === 'rain') {
-            if (play) UI.sounds.rain.play();
+            if (play) UI.sounds.rain.play().catch(() => {});
             else UI.sounds.rain.pause();
         }
     }
 
     function setupAI() {
+        if (!UI.aiSubmit) return;
         const askAI = async () => {
             const query = UI.aiQuery.value.trim();
             if (!query) return;
@@ -215,11 +247,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupVisualEffects() {
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            UI.dynamicGlow.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
-        });
+        if (window.innerWidth > 992) {
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                if (UI.dynamicGlow) {
+                    UI.dynamicGlow.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
+                }
+            });
+        }
     }
 
     function playSound(type) {

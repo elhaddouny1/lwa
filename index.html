@@ -18,13 +18,12 @@
     <!-- Cinematic Visual Engine -->
     <div class="visual-engine">
         <div class="dynamic-glow"></div>
-        <div class="particle-canvas" id="particles-js"></div>
         <div class="mesh-gradient"></div>
     </div>
 
     <!-- OS Interface -->
     <div class="os-container">
-        <!-- Sidebar: The Command Core -->
+        <!-- Sidebar: The Command Core (Desktop Only) -->
         <aside class="sidebar-legendary">
             <div class="brand-core">
                 <div class="brand-logo">
@@ -55,21 +54,8 @@
                     <div class="nav-link" data-page="ai-sovereign">
                         <i class="fas fa-microchip"></i> <span>الذكاء السيادي</span>
                     </div>
-                    <div class="nav-link" data-page="mind-maps">
-                        <i class="fas fa-diagram-project"></i> <span>الخرائط الذهنية</span>
-                    </div>
-                    <div class="nav-link" data-page="exam-sim">
-                        <i class="fas fa-terminal"></i> <span>محاكي الامتحانات</span>
-                    </div>
-                </div>
-
-                <div class="nav-group">
-                    <span class="group-title">المستقبل المهني</span>
-                    <div class="nav-link" data-page="career-sim">
-                        <i class="fas fa-briefcase"></i> <span>محاكي المهن</span>
-                    </div>
-                    <div class="nav-link" data-page="legal-news">
-                        <i class="fas fa-rss"></i> <span>الجريدة الحية</span>
+                    <div class="nav-link" data-page="focus">
+                        <i class="fas fa-stopwatch"></i> <span>وضع التركيز</span>
                     </div>
                 </div>
             </nav>
@@ -92,17 +78,19 @@
         <main class="viewport-legendary">
             <!-- Top Navigation Bar -->
             <header class="header-legendary">
-                <div class="search-vault">
-                    <i class="fas fa-magnifying-glass"></i>
-                    <input type="text" placeholder="ابحث في القوانين، المراجع، أو الدروس المغربية...">
-                    <div class="search-tags">
-                        <span>S1</span><span>S2</span><span>S3</span>
+                <div class="header-left">
+                    <div class="search-vault">
+                        <i class="fas fa-magnifying-glass"></i>
+                        <input type="text" placeholder="ابحث في القوانين المغربية...">
+                    </div>
+                    <div class="mobile-brand">
+                        <i class="fas fa-balance-scale-left"></i>
+                        <span>المتوقد OS</span>
                     </div>
                 </div>
                 <div class="header-actions">
-                    <div class="h-btn" id="ai-quick-access"><i class="fas fa-robot"></i></div>
                     <div class="h-btn" id="notif-center"><i class="fas fa-bolt"></i><span class="notif-dot"></span></div>
-                    <div class="h-btn theme-toggle"><i class="fas fa-moon"></i></div>
+                    <div class="h-btn"><i class="fas fa-cog"></i></div>
                 </div>
             </header>
 
@@ -113,11 +101,11 @@
                 <section id="page-dashboard" class="page active">
                     <div class="hero-section">
                         <div class="hero-content">
-                            <h2 class="animate__animated animate__fadeInDown">مرحباً بك في مستقبل القانون</h2>
+                            <h2 class="animate__animated animate__fadeInDown">مرحباً، محمد الهدوني</h2>
                             <p class="animate__animated animate__fadeInUp">أنت الآن تستخدم أقوى نظام تشغيل تعليمي قانوني في العالم. تم تطويره بذكاء خارق ليناسب طموحك.</p>
                             <div class="hero-btns">
-                                <button class="btn-legendary">ابدأ الرحلة</button>
-                                <button class="btn-outline">خطة التفوق</button>
+                                <button class="btn-legendary" onclick="document.querySelector('[data-page=\'focus\']').click()">ابدأ التركيز</button>
+                                <button class="btn-outline">المسار المهني</button>
                             </div>
                         </div>
                         <div class="hero-stats">
@@ -127,37 +115,14 @@
                             </div>
                             <div class="stat-card">
                                 <span class="stat-val">S6</span>
-                                <span class="stat-label">المستوى الحالي</span>
+                                <span class="stat-label">المستوى</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="legendary-grid">
-                        <!-- Focus Module -->
-                        <div class="grid-tile focus-module">
-                            <div class="tile-head"><h3><i class="fas fa-stopwatch"></i> وضع التركيز الأسطوري</h3></div>
-                            <div class="timer-circle">
-                                <svg viewBox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="45" class="bg"></circle>
-                                    <circle cx="50" cy="50" r="45" class="progress" id="timer-progress"></circle>
-                                </svg>
-                                <div class="timer-text">
-                                    <span id="timer-display">60:00</span>
-                                    <small>دقيقة تركيز</small>
-                                </div>
-                            </div>
-                            <div class="timer-actions">
-                                <button id="timer-start"><i class="fas fa-play"></i></button>
-                                <select id="ambient-engine">
-                                    <option value="none">صمت مطبق</option>
-                                    <option value="rain">مطر أطلسي</option>
-                                    <option value="library">مكتبة القرويين</option>
-                                </select>
-                            </div>
-                        </div>
-
                         <!-- Leaderboard Module -->
-                        <div class="grid-tile leaderboard-module">
+                        <div class="grid-tile leaderboard-module span-2">
                             <div class="tile-head"><h3><i class="fas fa-trophy"></i> مجلس الحكماء</h3></div>
                             <div class="leader-scroll" id="leaderboard-data">
                                 <!-- Injected by JS -->
@@ -165,8 +130,8 @@
                         </div>
 
                         <!-- Live News Module -->
-                        <div class="grid-tile news-module span-2">
-                            <div class="tile-head"><h3><i class="fas fa-newspaper"></i> الجريدة الرسمية الحية</h3></div>
+                        <div class="grid-tile news-module">
+                            <div class="tile-head"><h3><i class="fas fa-newspaper"></i> الجريدة الحية</h3></div>
                             <div class="news-list" id="news-data">
                                 <!-- Injected by JS -->
                             </div>
@@ -177,7 +142,7 @@
                 <!-- PAGE: LIBRARY -->
                 <section id="page-library" class="page">
                     <div class="library-hero">
-                        <h2>الخزانة القانونية المغربية الكبرى</h2>
+                        <h2>الخزانة القانونية المغربية</h2>
                         <div class="semester-filter">
                             <button class="s-btn active" data-s="all">الكل</button>
                             <button class="s-btn" data-s="s1">S1</button>
@@ -199,9 +164,9 @@
                         <div class="ai-header">
                             <div class="ai-status">
                                 <div class="pulse-dot"></div>
-                                <span>الذكاء السيادي متصل (GPT-4o)</span>
+                                <span>الذكاء السيادي متصل</span>
                             </div>
-                            <h2>المستشار القانوني الذكي</h2>
+                            <h3>المستشار القانوني الذكي</h3>
                         </div>
                         <div class="ai-chat-box" id="ai-chat-flow">
                             <div class="ai-msg bot">مرحباً بك يا محمد. أنا محرك الذكاء السيادي، مبرمج لفهم وتحليل القانون المغربي بدقة متناهية. كيف يمكنني خدمتك اليوم؟</div>
@@ -213,9 +178,34 @@
                                 <button title="استخراج فصول"><i class="fas fa-file-contract"></i></button>
                             </div>
                             <div class="ai-input-field">
-                                <textarea id="ai-query" placeholder="اسأل عن أي فصل قانوني، أو اطلب تحليل قضية..."></textarea>
+                                <textarea id="ai-query" placeholder="اسأل عن أي فصل قانوني..."></textarea>
                                 <button id="ai-submit"><i class="fas fa-paper-plane"></i></button>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAGE: FOCUS -->
+                <section id="page-focus" class="page">
+                    <div class="grid-tile focus-module">
+                        <div class="tile-head"><h3><i class="fas fa-stopwatch"></i> وضع التركيز الأسطوري</h3></div>
+                        <div class="timer-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" class="bg"></circle>
+                                <circle cx="50" cy="50" r="45" class="progress" id="timer-progress"></circle>
+                            </svg>
+                            <div class="timer-text">
+                                <span id="timer-display">60:00</span>
+                                <small>دقيقة تركيز</small>
+                            </div>
+                        </div>
+                        <div class="timer-actions">
+                            <select id="ambient-engine">
+                                <option value="none">صمت مطبق</option>
+                                <option value="rain">مطر أطلسي</option>
+                                <option value="library">مكتبة القرويين</option>
+                            </select>
+                            <button id="timer-start" class="btn-legendary"><i class="fas fa-play"></i></button>
                         </div>
                     </div>
                 </section>
@@ -224,13 +214,13 @@
         </main>
     </div>
 
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation (Visible on Mobile Only) -->
     <nav class="mobile-nav-legendary">
         <div class="m-link active" data-page="dashboard"><i class="fas fa-house"></i></div>
         <div class="m-link" data-page="library"><i class="fas fa-book"></i></div>
-        <div class="m-link center" id="m-ai-btn"><i class="fas fa-brain"></i></div>
-        <div class="m-link" data-page="ai-sovereign"><i class="fas fa-robot"></i></div>
-        <div class="m-link" data-page="career-sim"><i class="fas fa-user-tie"></i></div>
+        <div class="m-link center" data-page="ai-sovereign"><i class="fas fa-brain"></i></div>
+        <div class="m-link" data-page="focus"><i class="fas fa-stopwatch"></i></div>
+        <div class="m-link" id="m-profile-btn"><i class="fas fa-user"></i></div>
     </nav>
 
     <!-- Audio Engine -->
