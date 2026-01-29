@@ -1,37 +1,42 @@
 /**
- * MOTAWAQED OS - LEGENDARY ENGINE (2026)
- * Optimized for Mobile & Desktop
+ * MOTAWAQED GLOBAL - UNIVERSAL ENGINE (2026)
+ * The most powerful legal learning engine for the world.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    const LegendaryState = {
+    const GlobalState = {
         currentPage: 'dashboard',
-        user: { name: "محمد الهدوني", rank: "المشرف الأسطوري", points: 2500, level: "S6" },
+        currentLang: 'ar',
+        user: { name: "عضو عالمي", rank: "باحث قانوني", points: 2500 },
+        
         aiConfig: {
             apiKey: "sk-fyKI2GzpBr2WXOyv85On6xUmoqFOIOKu40ZPD3EV14y73NJQ65P7Hw7sMJ0JYWL4VcG5mar3kTnEbCp5JGN4oe000OP6",
             model: "gpt-4o"
         },
+
+        // Global Library Data
         library: [
-            { id: 1, s: "s1", title: "المدخل لدراسة القانون", cat: "نظري", desc: "القاعدة القانونية، مصادر القانون، وتطبيق القانون من حيث الزمان والمكان.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s1.html" },
-            { id: 2, s: "s2", title: "القانون الجنائي العام", cat: "جنائي", desc: "الجريمة، المسؤولية الجنائية، والعقوبات في التشريع المغربي الحديث.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s2.html" },
-            { id: 3, s: "s2", title: "قانون الالتزامات والعقود", cat: "مدني", desc: "النظرية العامة للالتزام: العقد، الإرادة المنفردة، والعمل غير المشروع.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s2.html" },
-            { id: 4, s: "s3", title: "مدونة الأسرة المغربية", cat: "أحوال شخصية", desc: "الزواج، انحلال ميثاق الزوجية، والولادة ونتائجها وفق آخر التعديلات.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s3.html" },
-            { id: 5, s: "s4", title: "القانون الجنائي الخاص", cat: "جنائي", desc: "دراسة الجرائم الواقعة على الأشخاص والأموال ونظام التبرير.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s4.html" },
-            { id: 6, s: "s5", title: "المسطرة الجنائية الجديدة", cat: "إجراءات", desc: "قانون 03.23 الجديد: البحث التمهيدي، التحقيق، وضمانات المحاكمة العادلة.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s5.html" },
-            { id: 7, s: "s6", title: "المسطرة المدنية", cat: "إجراءات", desc: "الدعوى، الاختصاص، طرق الطعن، والتنفيذ الجبري للأحكام.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s6.html" },
-            { id: 8, s: "s6", title: "القانون العقاري", cat: "عقاري", desc: "التحفيظ العقاري، الحقوق العينية، والضمانات العقارية بالمغرب.", link: "https://www.coursdroitarab.com/2019/09/molakhassat-9anon-droit-pdf-s6.html" }
+            { id: 1, s: "ma", title: "القانون المدني المغربي", cat: "قانون وطني", desc: "دراسة معمقة لقانون الالتزامات والعقود المغربي وتطبيقاته.", link: "https://www.coursdroitarab.com/" },
+            { id: 2, s: "intl", title: "القانون الدولي العام", cat: "دولي", desc: "مبادئ العلاقات الدولية، المعاهدات، والمنظمات العالمية.", link: "https://www.un.org/ar/our-work/uphold-international-law" },
+            { id: 3, s: "comparative", title: "الأنظمة القانونية المقارنة", cat: "مقارن", desc: "مقارنة بين النظام اللاتيني (Civil Law) والنظام الأنجلوسكسوني (Common Law).", link: "#" },
+            { id: 4, s: "ma", title: "القانون الجنائي المغربي", cat: "قانون وطني", desc: "مبادئ التجريم والعقاب وفق التشريع الجنائي المغربي.", link: "https://www.coursdroitarab.com/" },
+            { id: 5, s: "intl", title: "حقوق الإنسان العالمية", cat: "دولي", desc: "الإعلان العالمي لحقوق الإنسان والآليات الدولية لحمايتها.", link: "https://www.ohchr.org/ar/universal-declaration-of-human-rights" },
+            { id: 6, s: "sharia", title: "أصول الفقه الإسلامي", cat: "فقه", desc: "دراسة الأدلة الشرعية وطرق استنباط الأحكام الفقهية.", link: "#" }
         ],
+
         leaderboard: [
-            { name: "محمد الهدوني", pts: 2500, rank: "المشرف الأسطوري" },
-            { name: "سارة الإدريسي", pts: 2100, rank: "قاضية من الدرجة الأولى" },
-            { name: "أمين الفاسي", pts: 1850, rank: "محامي بهيئة الرباط" }
+            { name: "محمد الهدوني", pts: 2500, rank: "المشرف الأسطوري", country: "MA" },
+            { name: "Jean Dupont", pts: 2100, rank: "Expert Juridique", country: "FR" },
+            { name: "Sarah Smith", pts: 1850, rank: "Legal Scholar", country: "US" }
         ],
+
         news: [
-            { title: "دخول قانون المسطرة الجنائية الجديد 03.23 حيز التنفيذ", date: "اليوم" },
-            { title: "مشروع قانون رقم 37.24 يحال على لجنة العدل والتشريع", date: "أمس" },
-            { title: "تعديلات جوهرية في مدونة التجارة المغربية لعام 2026", date: "منذ يومين" }
+            { title: "محكمة العدل الدولية تصدر قراراً تاريخياً بشأن النزاعات الحدودية", date: "اليوم" },
+            { title: "المغرب يوقع اتفاقية دولية جديدة لحماية الملكية الفكرية", date: "أمس" },
+            { title: "تعديلات جديدة في قانون العمل الفرنسي تثير جدلاً واسعاً", date: "منذ يومين" }
         ],
+
         timer: { seconds: 3600, isRunning: false, interval: null }
     };
 
@@ -49,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         aiChatFlow: document.getElementById('ai-chat-flow'),
         aiSubmit: document.getElementById('ai-submit'),
         dynamicGlow: document.querySelector('.dynamic-glow'),
+        langBtns: document.querySelectorAll('.lang-btn'),
         sounds: {
             click: document.getElementById('audio-click'),
             success: document.getElementById('audio-success'),
@@ -63,15 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setupTimer();
         setupAI();
         setupVisualEffects();
+        setupLanguage();
         
-        // Mobile Profile Button Mockup
-        const profileBtn = document.getElementById('m-profile-btn');
-        if (profileBtn) {
-            profileBtn.onclick = () => {
-                playSound('click');
-                alert(`المستخدم: ${LegendaryState.user.name}\nالرتبة: ${LegendaryState.user.rank}\nالنقاط: ${LegendaryState.user.points}`);
-            };
-        }
+        setTimeout(() => playSound('success'), 1000);
     }
 
     function setupNavigation() {
@@ -81,32 +81,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!target) return;
 
                 playSound('click');
-
-                // Update UI State for both Desktop and Mobile navs
                 UI.navLinks.forEach(l => l.classList.remove('active'));
                 document.querySelectorAll(`[data-page="${target}"]`).forEach(l => l.classList.add('active'));
 
-                // Switch Pages
                 UI.pages.forEach(p => p.classList.remove('active'));
                 const targetPage = document.getElementById(`page-${target}`);
                 if (targetPage) {
                     targetPage.classList.add('active');
-                    // Scroll to top on page change
                     document.querySelector('.content-scroller').scrollTop = 0;
                 }
 
-                LegendaryState.currentPage = target;
+                GlobalState.currentPage = target;
             });
         });
     }
 
     function renderDashboard() {
         if (UI.leaderboard) {
-            UI.leaderboard.innerHTML = LegendaryState.leaderboard.map((u, i) => `
+            UI.leaderboard.innerHTML = GlobalState.leaderboard.map((u, i) => `
                 <div class="leader-row animate__animated animate__fadeInRight" style="animation-delay: ${i * 0.1}s">
                     <div class="l-pos">${i + 1}</div>
                     <div class="l-user">
-                        <span class="l-name">${u.name}</span>
+                        <span class="l-name">${u.name} <img src="https://flagcdn.com/w20/${u.country.toLowerCase()}.png" style="vertical-align: middle; margin-right: 5px;"></span>
                         <span class="l-rank">${u.rank}</span>
                     </div>
                     <div class="l-pts">${u.pts}</div>
@@ -115,13 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (UI.news) {
-            UI.news.innerHTML = LegendaryState.news.map(n => `
-                <div class="news-card">
-                    <div class="n-icon"><i class="fas fa-gavel"></i></div>
-                    <div class="n-body">
-                        <h4>${n.title}</h4>
-                        <span><i class="far fa-clock"></i> ${n.date}</span>
-                    </div>
+            UI.news.innerHTML = GlobalState.news.map(n => `
+                <div class="news-card-h animate__animated animate__fadeInUp">
+                    <h4>${n.title}</h4>
+                    <span><i class="far fa-clock"></i> ${n.date}</span>
                 </div>
             `).join('');
         }
@@ -129,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderLibrary(s) {
         if (!UI.libContainer) return;
-        const filtered = s === 'all' ? LegendaryState.library : LegendaryState.library.filter(item => item.s === s);
+        const filtered = s === 'all' ? GlobalState.library : GlobalState.library.filter(item => item.s === s);
         UI.libContainer.innerHTML = filtered.map(item => `
             <div class="law-vault-card animate__animated animate__zoomIn">
                 <div class="v-header">
@@ -157,34 +150,34 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupTimer() {
         if (!UI.timerStart) return;
         UI.timerStart.onclick = () => {
-            LegendaryState.timer.isRunning = !LegendaryState.timer.isRunning;
-            UI.timerStart.innerHTML = LegendaryState.timer.isRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+            GlobalState.timer.isRunning = !GlobalState.timer.isRunning;
+            UI.timerStart.innerHTML = GlobalState.timer.isRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
             playSound('click');
-            if (LegendaryState.timer.isRunning) {
-                LegendaryState.timer.interval = setInterval(updateTimer, 1000);
+            if (GlobalState.timer.isRunning) {
+                GlobalState.timer.interval = setInterval(updateTimer, 1000);
                 handleAmbient(true);
             } else {
-                clearInterval(LegendaryState.timer.interval);
+                clearInterval(GlobalState.timer.interval);
                 handleAmbient(false);
             }
         };
     }
 
     function updateTimer() {
-        if (LegendaryState.timer.seconds <= 0) {
-            clearInterval(LegendaryState.timer.interval);
+        if (GlobalState.timer.seconds <= 0) {
+            clearInterval(GlobalState.timer.interval);
             playSound('success');
-            alert("تمت المهمة! لقد أكملت ساعة من التركيز الأسطوري.");
+            alert("Mission Accomplished! You've completed a global focus session.");
             return;
         }
-        LegendaryState.timer.seconds--;
-        const mins = Math.floor(LegendaryState.timer.seconds / 60);
-        const secs = LegendaryState.timer.seconds % 60;
+        GlobalState.timer.seconds--;
+        const mins = Math.floor(GlobalState.timer.seconds / 60);
+        const secs = GlobalState.timer.seconds % 60;
         if (UI.timerDisplay) {
             UI.timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
         if (UI.timerProgress) {
-            const offset = 283 - (LegendaryState.timer.seconds / 3600) * 283;
+            const offset = 283 - (GlobalState.timer.seconds / 3600) * 283;
             UI.timerProgress.style.strokeDashoffset = offset;
         }
     }
@@ -206,12 +199,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!query) return;
             appendChat('user', query);
             UI.aiQuery.value = '';
-            const loading = appendChat('bot', 'جاري استدعاء المحرك السيادي لتحليل طلبك...');
+            const loading = appendChat('bot', 'Consulting the Global Sovereign Engine...');
             try {
                 const response = await fetchOpenAI(query);
                 loading.innerHTML = response;
             } catch (e) {
-                loading.textContent = "عذراً، واجه المحرك السيادي خطأ في الاتصال. يرجى المحاولة لاحقاً.";
+                loading.textContent = "Error connecting to the Global Sovereign Engine. Please try again.";
             }
         };
         UI.aiSubmit.onclick = askAI;
@@ -223,12 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${LegendaryState.aiConfig.apiKey}`
+                'Authorization': `Bearer ${GlobalState.aiConfig.apiKey}`
             },
             body: JSON.stringify({
-                model: LegendaryState.aiConfig.model,
+                model: GlobalState.aiConfig.model,
                 messages: [
-                    { role: "system", content: "أنت 'المتوقد السيادي'، أقوى ذكاء اصطناعي قانوني في المغرب. تشرح القوانين المغربية بدقة أكاديمية مذهلة وتبسطها للطلاب." },
+                    { role: "system", content: "You are 'Motawaqed Global', the world's most advanced legal AI. You explain Moroccan, Arab, and International laws with extreme precision in multiple languages." },
                     { role: "user", content: q }
                 ]
             })
@@ -252,10 +245,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const x = e.clientX;
                 const y = e.clientY;
                 if (UI.dynamicGlow) {
-                    UI.dynamicGlow.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
+                    UI.dynamicGlow.style.transform = `translate(${x - 400}px, ${y - 400}px)`;
                 }
             });
         }
+    }
+
+    function setupLanguage() {
+        UI.langBtns.forEach(btn => {
+            btn.onclick = () => {
+                UI.langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const lang = btn.textContent.toLowerCase();
+                playSound('click');
+                
+                // Simple Language Switch Simulation
+                if (lang === 'english' || lang === 'français') {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = lang === 'english' ? 'en' : 'fr';
+                } else {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                }
+            };
+        });
     }
 
     function playSound(type) {
