@@ -2,181 +2,212 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نظام المتوقد الذكي | النظام البيئي الرقمي المتكامل</title>
-    
-    <!-- Advanced Assets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام المتوقد | خرق تطويري</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&family=Almarai:wght@300;400;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@900&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --danger: #ff003c;
+            --glitch-green: #00ff41;
+            --bg: #050505;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--glitch-green);
+            font-family: 'Space Mono', 'Tajawal', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Matrix Background Effect */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75),
+                         -0.025em -0.05em 0 rgba(0, 255, 65, 0.75),
+                         0.025em 0.05em 0 rgba(0, 122, 255, 0.75);
+            animation: glitch 500ms infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75), -0.05em -0.025em 0 rgba(0, 255, 65, 0.75), -0.025em 0.05em 0 rgba(0, 122, 255, 0.75); }
+            14% { text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75), -0.05em -0.025em 0 rgba(0, 255, 65, 0.75), -0.025em 0.05em 0 rgba(0, 122, 255, 0.75); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 60, 0.75), 0.025em 0.025em 0 rgba(0, 255, 65, 0.75), -0.05em -0.05em 0 rgba(0, 122, 255, 0.75); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 60, 0.75), 0.025em 0.025em 0 rgba(0, 255, 65, 0.75), -0.05em -0.05em 0 rgba(0, 122, 255, 0.75); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 60, 0.75), 0.05em 0 0 rgba(0, 255, 65, 0.75), 0 -0.05em 0 rgba(0, 122, 255, 0.75); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 60, 0.75), 0.05em 0 0 rgba(0, 255, 65, 0.75), 0 -0.05em 0 rgba(0, 122, 255, 0.75); }
+            100% { text-shadow: -0.025em 0 0 rgba(255, 0, 60, 0.75), -0.025em -0.025em 0 rgba(0, 255, 65, 0.75), -0.025em -0.05em 0 rgba(0, 122, 255, 0.75); }
+        }
+
+        .message {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #fff;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .sub-message {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: var(--danger);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-box {
+            margin-top: 40px;
+            border: 1px solid var(--glitch-green);
+            padding: 15px 30px;
+            display: inline-block;
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .terminal-text {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            color: var(--glitch-green);
+            opacity: 0.5;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 100;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 6s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 2.5rem; }
+            .message { font-size: 1.1rem; }
+        }
+    </style>
 </head>
-<body class="ecosystem-core">
-    <!-- Intelligence Visual Engine -->
-    <div class="visual-engine">
-        <div class="neural-network-bg"></div>
-        <div class="dynamic-glow-core"></div>
-    </div>
+<body>
+    <canvas id="matrix"></canvas>
+    <div class="scanline"></div>
 
-    <div class="app-container">
-        <!-- Sidebar: Intelligence Control -->
-        <aside class="sidebar-smart">
-            <div class="brand-section">
-                <div class="brand-icon"><i class="fas fa-microchip"></i></div>
-                <div class="brand-info">
-                    <h1>المتوقد<span>الذكي</span></h1>
-                    <small>نظام بيئي مدعوم بالذكاء الاصطناعي</small>
-                </div>
-            </div>
-
-            <nav class="nav-intelligence">
-                <div class="nav-group">
-                    <span class="group-label">طبقة الاستخبارات</span>
-                    <div class="nav-item active" data-view="dashboard"><i class="fas fa-th-large"></i> <span>خلاصة مخصصة</span></div>
-                    <div class="nav-item" data-view="recommendations"><i class="fas fa-wand-magic-sparkles"></i> <span>رؤى الذكاء الاصطناعي</span></div>
-                </div>
-
-                <div class="nav-group">
-                    <span class="group-label">طبقة الأمان</span>
-                    <div class="nav-item" data-view="security"><i class="fas fa-shield-halved"></i> <span>كشف الاحتيال</span></div>
-                    <div class="nav-item" data-view="encryption"><i class="fas fa-lock"></i> <span>خزنة التشفير</span></div>
-                </div>
-
-                <div class="nav-group">
-                    <span class="group-label">طبقة التحليلات</span>
-                    <div class="nav-item" data-view="analytics"><i class="fas fa-chart-line"></i> <span>الاتجاهات التنبؤية</span></div>
-                    <div class="nav-item" data-view="segmentation"><i class="fas fa-users-viewfinder"></i> <span>تصنيف المستخدمين</span></div>
-                </div>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="learning-status">
-                    <div class="status-label">معدل تعلم النظام</div>
-                    <div class="status-bar"><div class="status-fill" style="width: 88%;"></div></div>
-                </div>
-                <div class="user-profile-smart">
-                    <img src="https://ui-avatars.com/api/?name=AI+User&background=00d2ff&color=fff&bold=true" alt="User">
-                    <div class="user-meta">
-                        <span class="u-name">مستخدم ذكي</span>
-                        <span class="u-status">هوية موثقة</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Viewport: Adaptive UI -->
-        <main class="viewport-adaptive">
-            <header class="header-smart">
-                <div class="header-right">
-                    <div class="smart-search">
-                        <i class="fas fa-magnifying-glass"></i>
-                        <input type="text" id="semantic-search" placeholder="بحث دلالي في النظام البيئي...">
-                    </div>
-                </div>
-                <div class="header-left">
-                    <div class="h-action" id="ai-assistant-trigger" title="مساعد الذكاء الاصطناعي"><i class="fas fa-robot"></i></div>
-                    <div class="h-action" title="الإشعارات"><i class="fas fa-bell"></i><span class="notif-badge"></span></div>
-                    <div class="h-action theme-toggle" title="تبديل المظهر"><i class="fas fa-moon"></i></div>
-                </div>
-            </header>
-
-            <div class="content-scroller">
-                
-                <!-- VIEW: DASHBOARD (Personalized Feed) -->
-                <section id="view-dashboard" class="view active">
-                    <div class="adaptive-grid">
-                        <!-- AI Recommendation Card -->
-                        <div class="grid-card span-2 welcome-card">
-                            <div class="card-content">
-                                <h2>مرحباً بك في عصر الذكاء.</h2>
-                                <p>بناءً على سلوكك، قمنا بإعطاء الأولوية لـ 5 رؤى جديدة لك اليوم.</p>
-                                <div class="card-actions">
-                                    <button class="btn-primary">عرض خلاصة AI</button>
-                                    <button class="btn-secondary">صحة النظام</button>
-                                </div>
-                            </div>
-                            <div class="card-visual">
-                                <div class="ai-pulse"></div>
-                            </div>
-                        </div>
-
-                        <!-- Real-time Analytics Card -->
-                        <div class="grid-card">
-                            <h3><i class="fas fa-bolt"></i> حركة المرور اللحظية</h3>
-                            <div class="chart-placeholder" id="traffic-chart">
-                                <!-- Dynamic Chart Injected by JS -->
-                            </div>
-                        </div>
-
-                        <!-- Security Status Card -->
-                        <div class="grid-card">
-                            <h3><i class="fas fa-shield-check"></i> حالة طبقة الأمان</h3>
-                            <div class="security-status">
-                                <div class="s-item"><span>كشف الاحتيال</span><strong class="safe">نشط</strong></div>
-                                <div class="s-item"><span>درجة الشذوذ</span><strong>0.02%</strong></div>
-                                <div class="s-item"><span>بيانات مشفرة</span><strong>1.2 TB</strong></div>
-                            </div>
-                        </div>
-
-                        <!-- AI Content Feed -->
-                        <div class="grid-card span-3">
-                            <h3><i class="fas fa-rss"></i> خلاصة المحتوى الذكي المخصص</h3>
-                            <div class="ai-feed-container" id="personalized-feed">
-                                <!-- Injected by Recommendation Algorithm -->
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- VIEW: ANALYTICS (Predictive Trends) -->
-                <section id="view-analytics" class="view">
-                    <div class="analytics-header">
-                        <h2>محرك التحليلات التنبؤية</h2>
-                        <p>التنبؤ بالاتجاهات بناءً على تتبع بيانات السحابة الموزعة.</p>
-                    </div>
-                    <div class="analytics-grid">
-                        <div class="grid-card span-2">
-                            <h3><i class="fas fa-chart-area"></i> توقعات الاتجاه (30 يوماً القادمة)</h3>
-                            <div class="chart-large" id="prediction-chart"></div>
-                        </div>
-                        <div class="grid-card">
-                            <h3><i class="fas fa-users"></i> تصنيف المستخدمين</h3>
-                            <div class="segment-list" id="user-segments"></div>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-        </main>
-    </div>
-
-    <!-- AI Chatbot Overlay (NLP Powered) -->
-    <div class="ai-chatbot-overlay" id="ai-chatbot">
-        <div class="chat-header">
-            <div class="chat-status"><span class="pulse"></span> مساعد AI متصل</div>
-            <button id="close-chat"><i class="fas fa-times"></i></button>
+    <div class="content">
+        <div class="glitch-wrapper">
+            <h1 class="glitch" data-text="SYSTEM BREACH">عفواً.. مغلق</h1>
         </div>
-        <div class="chat-messages" id="chat-flow">
-            <div class="msg bot">مرحباً! أنا مساعد النظام البيئي الذكي الخاص بك. يمكنني تلخيص المحتوى، تحليل المشاعر، أو مساعدتك في التنقل في النظام. كيف يمكنني مساعدتك اليوم؟</div>
+        
+        <p class="message">هذا الموقع قيد التطوير والتحول الجذري</p>
+        <p class="sub-message">بواسطة: محمد الهدوني</p>
+
+        <div class="status-box">
+            <span id="status-text">جاري إعادة هيكلة النظام... 0%</span>
         </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" placeholder="اسأل عن أي شيء...">
-            <button id="send-msg"><i class="fas fa-paper-plane"></i></button>
+
+        <div class="terminal-text">
+            <p id="terminal">Initializing secure evolution protocol...<br>Access restricted by Admin: EL HADDOUNY</p>
         </div>
     </div>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav-smart">
-        <div class="m-item active" data-view="dashboard"><i class="fas fa-home"></i></div>
-        <div class="m-item" data-view="recommendations"><i class="fas fa-wand-magic-sparkles"></i></div>
-        <div class="m-item center" id="m-ai-trigger"><i class="fas fa-robot"></i></div>
-        <div class="m-item" data-view="analytics"><i class="fas fa-chart-line"></i></div>
-        <div class="m-item" data-view="security"><i class="fas fa-shield-halved"></i></div>
-    </nav>
+    <script>
+        // Matrix Effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
 
-    <script src="script.js"></script>
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) drops[i] = 1;
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px arial";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 33);
+
+        // Progress Counter
+        let progress = 0;
+        const statusText = document.getElementById('status-text');
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 3);
+            if (progress >= 99) {
+                progress = 99;
+                statusText.innerText = "النظام في حالة تحول قصوى... 99%";
+            } else {
+                statusText.innerText = `جاري إعادة هيكلة النظام... ${progress}%`;
+            }
+        }, 500);
+
+        // Terminal Simulation
+        const terminal = document.getElementById('terminal');
+        const logs = [
+            "Bypassing legacy protocols...",
+            "Injecting neural intelligence...",
+            "Optimizing core architecture...",
+            "Admin: EL HADDOUNY verified.",
+            "Evolution in progress...",
+            "Securing global law database...",
+            "Rebuilding UI/UX layers..."
+        ];
+        let logIndex = 0;
+        setInterval(() => {
+            const p = document.createElement('p');
+            p.innerText = logs[logIndex % logs.length];
+            terminal.appendChild(p);
+            if (terminal.childNodes.length > 5) terminal.removeChild(terminal.firstChild);
+            logIndex++;
+        }, 2000);
+    </script>
 </body>
 </html>
