@@ -1,15 +1,15 @@
 /* ==========================================================================
-   SMART ECOSYSTEM OS - NEURAL ENGINE (2026)
+   SMART ECOSYSTEM OS - NEURAL ENGINE (ARABIC EDITION 2026)
    ========================================================================== */
 
 const SmartEcosystem = (() => {
-    // --- State Management (Learning Core) ---
+    // --- إدارة الحالة (نواة التعلم) ---
     const state = {
         userBehavior: {
             clicks: 0,
             views: [],
             timeSpent: 0,
-            preferences: ['AI', 'Security', 'Data'],
+            preferences: ['الذكاء الاصطناعي', 'الأمن الرقمي', 'تحليل البيانات'],
             sentiment: 'neutral'
         },
         systemHealth: {
@@ -22,35 +22,35 @@ const SmartEcosystem = (() => {
         aiKey: 'sk-fyKI2GzpBr2WXOyv85On6xUmoqFOIOKu40ZPD3EV14y73NJQ65P7Hw7sMJ0JYWL4VcG5mar3kTnEbCp5JGN4oe000OP6'
     };
 
-    // --- Intelligence Layer: Recommendation Engine ---
+    // --- طبقة الاستخبارات: محرك التوصيات ---
     const recommendationEngine = {
         getFeed: () => {
             const pool = [
-                { id: 1, tag: 'Intelligence', title: 'Neural Network Optimization', desc: 'Improving inference speed by 40% using quantization.' },
-                { id: 2, tag: 'Security', title: 'Zero-Trust Architecture', desc: 'Implementing granular access control for distributed systems.' },
-                { id: 3, tag: 'Analytics', title: 'Predictive User Clustering', desc: 'New K-Means model deployed for real-time segmentation.' },
-                { id: 4, tag: 'Performance', title: 'Edge Caching Strategies', desc: 'Reducing latency to sub-10ms globally.' },
-                { id: 5, tag: 'AI', title: 'Semantic Search Evolution', desc: 'Moving from keyword matching to vector embeddings.' }
+                { id: 1, tag: 'الذكاء الاصطناعي', title: 'تحسين الشبكات العصبية', desc: 'تحسين سرعة الاستدلال بنسبة 40% باستخدام تقنيات التكميم الحديثة.' },
+                { id: 2, tag: 'الأمن الرقمي', title: 'بنية الثقة الصفرية', desc: 'تنفيذ ضوابط وصول دقيقة للأنظمة الموزعة لضمان أقصى حماية.' },
+                { id: 3, tag: 'التحليلات', title: 'التجميع التنبؤي للمستخدمين', desc: 'نشر نموذج K-Means جديد لتصنيف المستخدمين في الوقت الفعلي.' },
+                { id: 4, tag: 'الأداء', title: 'استراتيجيات التخزين المؤقت', desc: 'تقليل زمن الاستجابة إلى أقل من 10 مللي ثانية على مستوى العالم.' },
+                { id: 5, tag: 'الذكاء الاصطناعي', title: 'تطور البحث الدلالي', desc: 'الانتقال من مطابقة الكلمات المفتاحية إلى استخدام التضمينات المتجهة.' }
             ];
-            // Simulate AI prioritization based on preferences
+            // محاكاة ترتيب الأولويات بناءً على تفضيلات المستخدم
             return pool.sort(() => Math.random() - 0.5);
         }
     };
 
-    // --- Security Layer: Anomaly Detection ---
+    // --- طبقة الأمان: كشف الشذوذ ---
     const securityEngine = {
         checkAnomaly: (action) => {
-            // Simulated Fraud Detection Algorithm
+            // خوارزمية محاكاة لكشف الاحتيال
             const score = Math.random();
             if (score > 0.98) {
                 state.systemHealth.fraudDetected = true;
                 state.systemHealth.anomalyScore = score.toFixed(4);
-                UI.notify('Anomaly Detected!', 'High risk behavior identified in session.', 'error');
+                UI.notify('تم كشف نشاط مشبوه!', 'تم تحديد سلوك عالي المخاطر في الجلسة الحالية.', 'error');
             }
         }
     };
 
-    // --- UI Engine: Adaptive Layout ---
+    // --- محرك واجهة المستخدم: التنسيق التكيفي ---
     const UI = {
         init: () => {
             UI.bindEvents();
@@ -61,7 +61,7 @@ const SmartEcosystem = (() => {
         },
 
         bindEvents: () => {
-            // Navigation
+            // التنقل
             document.querySelectorAll('.nav-item, .m-item').forEach(item => {
                 item.addEventListener('click', (e) => {
                     const view = item.getAttribute('data-view');
@@ -70,7 +70,7 @@ const SmartEcosystem = (() => {
                 });
             });
 
-            // AI Chatbot
+            // مساعد الذكاء الاصطناعي
             const chatTrigger = document.getElementById('ai-assistant-trigger');
             const mChatTrigger = document.getElementById('m-ai-trigger');
             const chatPanel = document.getElementById('ai-chatbot');
@@ -84,13 +84,13 @@ const SmartEcosystem = (() => {
             mChatTrigger.addEventListener('click', toggleChat);
             closeChat.addEventListener('click', () => chatPanel.style.display = 'none');
 
-            // AI Send Message
+            // إرسال رسالة AI
             document.getElementById('send-msg')?.addEventListener('click', UI.handleAIChat);
             document.getElementById('user-input')?.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') UI.handleAIChat();
             });
 
-            // Theme Toggle
+            // تبديل المظهر
             document.querySelector('.theme-toggle').addEventListener('click', UI.toggleTheme);
         },
 
@@ -127,21 +127,21 @@ const SmartEcosystem = (() => {
             const text = input.value.trim();
             if (!text) return;
 
-            // Add User Message
+            // إضافة رسالة المستخدم
             UI.addChatMessage('user', text);
             input.value = '';
 
-            // AI Processing (Simulated NLP + OpenAI Logic)
-            UI.addChatMessage('bot', 'Analyzing request through Neural Engine...');
+            // معالجة AI (محاكاة NLP + منطق OpenAI)
+            UI.addChatMessage('bot', 'جاري تحليل طلبك عبر المحرك العصبي...');
             
             try {
-                // Real AI Integration Logic (Simulated for this demo)
+                // محاكاة استجابة ذكية
                 setTimeout(() => {
                     const response = UI.generateSmartResponse(text);
                     UI.addChatMessage('bot', response);
                 }, 1000);
             } catch (error) {
-                UI.addChatMessage('bot', 'Error connecting to Intelligence Layer.');
+                UI.addChatMessage('bot', 'خطأ في الاتصال بطبقة الاستخبارات.');
             }
         },
 
@@ -156,16 +156,16 @@ const SmartEcosystem = (() => {
 
         generateSmartResponse: (input) => {
             const lower = input.toLowerCase();
-            if (lower.includes('security')) return "Security Layer is active. Current anomaly score is 0.02%. All data is E2E encrypted.";
-            if (lower.includes('recommend')) return "I've updated your feed based on your interest in " + state.userBehavior.preferences.join(', ') + ".";
-            if (lower.includes('summarize')) return "The system has summarized 12 recent data points. Key trend: AI inference efficiency is rising.";
-            return "I am processing your request using the Smart Ecosystem's distributed cloud architecture. How else can I help?";
+            if (lower.includes('أمن') || lower.includes('security')) return "طبقة الأمان نشطة حالياً. درجة الشذوذ الحالية هي 0.02%. جميع البيانات مشفرة بالكامل.";
+            if (lower.includes('توصية') || lower.includes('recommend')) return "لقد قمت بتحديث خلاصتك بناءً على اهتمامك بـ " + state.userBehavior.preferences.join('، ') + ".";
+            if (lower.includes('تلخيص') || lower.includes('summarize')) return "قام النظام بتلخيص 12 نقطة بيانات أخيرة. الاتجاه الرئيسي: كفاءة استدلال الذكاء الاصطناعي في ارتفاع.";
+            return "أقوم بمعالجة طلبك باستخدام البنية السحابية الموزعة للنظام البيئي الذكي. كيف يمكنني مساعدتك أكثر؟";
         },
 
         startDataTracking: () => {
             setInterval(() => {
                 state.userBehavior.timeSpent += 1;
-                // Simulate learning
+                // محاكاة التعلم
                 if (state.userBehavior.timeSpent % 10 === 0) {
                     state.systemHealth.learningRate = Math.min(99, state.systemHealth.learningRate + 0.1);
                     UI.updateLearningStatus();
@@ -188,7 +188,7 @@ const SmartEcosystem = (() => {
         },
 
         notify: (title, msg, type) => {
-            // Simple notification logic
+            // منطق إشعارات بسيط
             console.log(`[${type.toUpperCase()}] ${title}: ${msg}`);
         },
 
@@ -203,5 +203,5 @@ const SmartEcosystem = (() => {
     return { init: UI.init };
 })();
 
-// Initialize Ecosystem on Load
+// تهيئة النظام عند التحميل
 document.addEventListener('DOMContentLoaded', SmartEcosystem.init);
