@@ -3,270 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام المتوقد | مركز القيادة القانوني</title>
+    <title>نظام المتوقد | الهاوية الرقمية</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;900&family=JetBrains+Mono:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Tajawal:wght@900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-glow: #00ff9d;
-            --secondary-glow: #0072ff;
-            --bg-deep: #0a0a0c;
-            --panel-bg: rgba(20, 20, 25, 0.8);
-            --text-main: #e0e0e0;
+            --blood-red: #8b0000;
+            --pure-red: #ff0000;
+            --deep-black: #000000;
+            --glitch-white: #f0f0f0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            font-family: 'Tajawal', sans-serif;
+            background-color: var(--deep-black);
+            color: var(--pure-red);
+            font-family: 'Space Mono', 'Tajawal', monospace;
             height: 100vh;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
             position: relative;
+            perspective: 1000px;
         }
 
-        /* Subtle Matrix Background */
+        /* Blood Matrix Background */
         canvas {
             position: absolute;
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.1;
+            opacity: 0.4;
+            filter: blur(1px);
         }
 
-        .main-frame {
+        .noise {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://media.giphy.com/media/oEI9uWUqnW9Fe/giphy.gif');
+            opacity: 0.05;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .container {
             position: relative;
             z-index: 10;
-            width: 95%;
-            max-width: 1100px;
-            height: 85vh;
-            background: var(--panel-bg);
-            border: 1px solid rgba(0, 255, 157, 0.2);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(15px);
-            border-radius: 4px;
-            overflow: hidden;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            border: 2px solid var(--blood-red);
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 50px var(--blood-red);
+            animation: shake 0.5s infinite alternate;
         }
 
-        /* Top Bar */
-        .top-bar {
-            height: 40px;
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--primary-glow);
-            letter-spacing: 1px;
-        }
-
-        .content-area {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            padding: 40px;
-            gap: 40px;
-        }
-
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: right;
-        }
-
-        .status-tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(0, 255, 157, 0.1);
-            border: 1px solid var(--primary-glow);
-            color: var(--primary-glow);
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            align-self: flex-start;
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-family: 'Nosifer', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--pure-red);
+            text-shadow: 5px 5px 0px #000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .admin-warning {
+            background: var(--pure-red);
+            color: #000;
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            background: linear-gradient(to left, #fff, var(--primary-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            padding: 5px 15px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
         }
 
-        .admin-info {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            color: var(--secondary-glow);
-            margin-bottom: 40px;
-            opacity: 0.8;
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--glitch-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* Countdown */
-        .countdown-grid {
+        .countdown {
             display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
         }
 
-        .c-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            min-width: 80px;
-            text-align: center;
+        .c-unit {
+            background: rgba(139, 0, 0, 0.2);
+            border: 1px solid var(--pure-red);
+            padding: 10px;
+            min-width: 70px;
         }
 
         .c-val {
-            display: block;
-            font-size: 2rem;
-            font-weight: 900;
-            font-family: 'JetBrains Mono', monospace;
-            color: #fff;
-        }
-
-        .c-label {
-            font-size: 0.7rem;
-            opacity: 0.5;
-            text-transform: uppercase;
-        }
-
-        /* Features Sidebar */
-        .sidebar {
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            padding-right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .feature-item {
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.02);
-            border-right: 2px solid var(--primary-glow);
-            transition: 0.3s;
-        }
-
-        .feature-item:hover {
-            background: rgba(0, 255, 157, 0.05);
-            transform: translateX(-5px);
-        }
-
-        .feature-item h4 {
-            font-size: 0.95rem;
-            color: var(--primary-glow);
-            margin-bottom: 5px;
-        }
-
-        .feature-item p {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            line-height: 1.4;
-        }
-
-        /* Bottom Status */
-        .bottom-bar {
-            height: 30px;
-            background: var(--primary-glow);
-            color: #000;
-            font-size: 0.7rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            font-family: 'JetBrains Mono', monospace;
+            display: block;
         }
 
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        .c-lbl {
+            font-size: 0.6rem;
+            opacity: 0.6;
+        }
 
-        @media (max-width: 900px) {
-            .content-area { grid-template-columns: 1fr; padding: 20px; }
-            .sidebar { display: none; }
-            h1 { font-size: 2.2rem; }
+        .features-list {
+            text-align: right;
+            border-top: 1px solid var(--blood-red);
+            padding-top: 20px;
+        }
+
+        .feature {
+            margin-bottom: 15px;
+            border-right: 4px solid var(--pure-red);
+            padding-right: 10px;
+        }
+
+        .feature h4 { font-size: 0.9rem; color: var(--pure-red); }
+        .feature p { font-size: 0.7rem; color: #888; }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: var(--blood-red);
+            font-family: monospace;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 15px; width: 95%; }
+            .message { font-size: 0.9rem; }
+            .c-unit { min-width: 60px; padding: 5px; }
+            .c-val { font-size: 1.4rem; }
+        }
+
+        .glitch-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 0, 0, 0.05);
+            z-index: 100;
+            pointer-events: none;
+            animation: glitch-anim 0.2s infinite;
+            display: none;
+        }
+
+        @keyframes glitch-anim {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <canvas id="matrix"></canvas>
+    <div class="noise"></div>
+    <div class="glitch-overlay" id="overlay"></div>
+    <canvas id="blood-matrix"></canvas>
 
-    <div class="main-frame">
-        <div class="top-bar">
-            <span>SYSTEM_STATUS: EVOLVING</span>
-            <span>ENCRYPTION: AES-256</span>
-            <span>ADMIN: EL_HADDOUNY</span>
+    <div class="container">
+        <div class="admin-warning">تحذير: سيطرة كاملة - محمد الهدوني</div>
+        <h1>نظام المتوقد</h1>
+        <p class="message">التحول الأخير قد بدأ.. لا مفر</p>
+
+        <div class="countdown">
+            <div class="c-unit"><span class="c-val" id="h">05</span><span class="c-lbl">ساعة</span></div>
+            <div class="c-unit"><span class="c-val" id="m">00</span><span class="c-lbl">دقيقة</span></div>
+            <div class="c-unit"><span class="c-val" id="s">00</span><span class="c-lbl">ثانية</span></div>
         </div>
 
-        <div class="content-area">
-            <div class="hero-section">
-                <div class="status-tag">وضع الصيانة الاستراتيجية</div>
-                <h1>نظام المتوقد<br>الجيل القادم</h1>
-                <p class="admin-info">> المطور المسؤول: محمد الهدوني</p>
-                
-                <p style="margin-bottom: 30px; opacity: 0.7; max-width: 500px;">يتم حالياً دمج بروتوكولات الذكاء الاصطناعي المتقدمة وإعادة هيكلة قاعدة البيانات القانونية لضمان أداء عقلاني فائق.</p>
-
-                <div class="countdown-grid">
-                    <div class="c-box"><span class="c-val" id="h">05</span><span class="c-label">ساعة</span></div>
-                    <div class="c-box"><span class="c-val" id="m">00</span><span class="c-label">دقيقة</span></div>
-                    <div class="c-box"><span class="c-val" id="s">00</span><span class="c-label">ثانية</span></div>
-                </div>
+        <div class="features-list">
+            <div class="feature">
+                <h4>الذكاء السيادي GPT-4o</h4>
+                <p>تم دمج الوعي الاصطناعي الكامل في النواة.</p>
             </div>
-
-            <div class="sidebar">
-                <h3 style="font-size: 0.8rem; opacity: 0.4; margin-bottom: 10px;">الأنظمة الفرعية القادمة:</h3>
-                <div class="feature-item">
-                    <h4>محرك البحث الدلالي</h4>
-                    <p>فهم السياق القانوني العميق بدلاً من مجرد مطابقة الكلمات.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>محلل النصوص الذكي</h4>
-                    <p>تفكيك النصوص القانونية المعقدة إلى عناصر منطقية واضحة.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>إدارة المعرفة الرقمية</h4>
-                    <p>نظام أرشفة ذكي يربط بين المواد القانونية والمراجع الدولية.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>مساعد الصياغة العقلاني</h4>
-                    <p>أدوات متطورة لبناء المذكرات القانونية وفق معايير احترافية.</p>
-                </div>
+            <div class="feature">
+                <h4>المكتبة المحرمة</h4>
+                <p>الوصول إلى كافة المراجع القانونية العالمية.</p>
+            </div>
+            <div class="feature">
+                <h4>بروتوكول التحليل المطلق</h4>
+                <p>تفكيك المنطق القانوني إلى ذرات رقمية.</p>
             </div>
         </div>
 
-        <div class="bottom-bar">
-            <span class="blink">●</span> &nbsp; جاري تحميل الوحدات العصبية... 88% مكتمل | الوصول مقيد للمشرف فقط
-        </div>
+        <p class="footer">ACCESS_DENIED // EVOLUTION_IN_PROGRESS // ADMIN: EL_HADDOUNY</p>
     </div>
 
     <script>
-        // Subtle Matrix
-        const canvas = document.getElementById('matrix');
+        // Blood Matrix
+        const canvas = document.getElementById('blood-matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const chars = "0101010101010101";
+        const chars = "ｦｱｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789";
         const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
 
         function draw() {
-            ctx.fillStyle = "rgba(10, 10, 12, 0.1)";
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "rgba(0, 255, 157, 0.2)";
+            ctx.fillStyle = "#8b0000";
             ctx.font = fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
@@ -276,7 +243,7 @@
                 drops[i]++;
             }
         }
-        setInterval(draw, 50);
+        setInterval(draw, 40);
 
         // Countdown
         let target = new Date().getTime() + (5 * 60 * 60 * 1000);
@@ -290,6 +257,12 @@
             document.getElementById('h').innerText = h.toString().padStart(2, '0');
             document.getElementById('m').innerText = m.toString().padStart(2, '0');
             document.getElementById('s').innerText = s.toString().padStart(2, '0');
+            
+            // Random Glitch Trigger
+            if (Math.random() > 0.95) {
+                document.getElementById('overlay').style.display = 'block';
+                setTimeout(() => { document.getElementById('overlay').style.display = 'none'; }, 100);
+            }
         }
         setInterval(update, 1000);
         update();
