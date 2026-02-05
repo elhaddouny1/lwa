@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="bg-animation"></div>
+    <div class="parallax-bg" id="parallaxBg"></div>
 
     <!-- Header -->
     <header>
@@ -33,8 +34,8 @@
     <div class="container">
         <!-- Welcome Section -->
         <div class="welcome-section">
-            <h1>🚀 مرحباً بك في منصة المتوقد الذكية</h1>
-            <p>منصة متكاملة لتطوير مهاراتك القانونية مع الذكاء الاصطناعي الحديث</p>
+            <h1>🏛️ مرحباً بك في منصة المتوقد الذكية</h1>
+            <p>منصة قانونية عصرية متكاملة مستوحاة من العمارة العالمية الحديثة، تجمع بين الفخامة والذكاء الاصطناعي لتطوير مهاراتك القانونية.</p>
         </div>
 
         <!-- Stats Dashboard -->
@@ -62,7 +63,7 @@
         </div>
 
         <!-- Subjects Section -->
-        <h2 style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 25px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">📖 المواد القانونية</h2>
+        <h2 style="font-size: 2rem; background: linear-gradient(135deg, #d4af37, #00d9ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 30px;">📖 المواد القانونية</h2>
         <div class="subjects-grid" id="subjectsContainer">
             <!-- Subjects will be dynamically loaded here -->
         </div>
@@ -77,8 +78,8 @@
             </div>
             <div class="ai-content">
                 <p>
-                    مرحباً! أنا مساعدك الذكي المتخصص في القانون. يمكنني تحليل النصوص القانونية، شرح المفاهيم المعقدة، 
-                    والإجابة على أسئلتك حول أي مادة قانونية. استخدمني لتحسين فهمك وتطوير مهاراتك.
+                    مرحباً! أنا مساعدك الذكي المتخصص في القانون، مدعوم بأحدث تقنيات الذكاء الاصطناعي. يمكنني تحليل النصوص القانونية، شرح المفاهيم المعقدة، 
+                    والإجابة على أسئلتك حول أي مادة قانونية. استخدمني لتحسين فهمك وتطوير مهاراتك بشكل متقدم.
                 </p>
             </div>
             <div class="ai-buttons">
@@ -109,12 +110,38 @@
             <div class="footer-credit">
                 تطوير وإشراف: <strong>محمد الهدوني</strong>
             </div>
-            <div style="font-size: 0.85rem; color: #666;">
-                © 2024 منصة المتوقد - جميع الحقوق محفوظة
+            <div style="font-size: 0.9rem; color: #666;">
+                © 2024 منصة المتوقد - جميع الحقوق محفوظة | تصميم معماري عالمي
             </div>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+        // Parallax Effect
+        const parallaxBg = document.getElementById('parallaxBg');
+        const backgrounds = [
+            'assets/images/modern_law_building.jpg',
+            'assets/images/futuristic_library.jpg',
+            'assets/images/global_justice_center.jpg'
+        ];
+        let currentBg = 0;
+
+        function updateParallaxBg() {
+            parallaxBg.style.backgroundImage = `url('${backgrounds[currentBg]}')`;
+            currentBg = (currentBg + 1) % backgrounds.length;
+        }
+
+        updateParallaxBg();
+        setInterval(updateParallaxBg, 8000);
+
+        // Parallax scroll effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
