@@ -2,8 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعيين محمد الهدوني في سلك القضاء: محطة تاريخية في مسار العدالة - أخبار العالم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>تعيين محمد الهدوني في سلك القضاء - أخبار العدالة</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23cc0000'>⚖</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,15 +25,21 @@
     <!-- Main Header -->
     <header>
         <div class="header-container">
-            <div class="main-nav">
-                <a href="#">سياسة</a>
-                <a href="#">اقتصاد</a>
-                <a href="#">مجتمع</a>
-                <a href="#">عدالة</a>
-                <a href="#">دولي</a>
-            </div>
+            <button class="menu-toggle active" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <a href="#" class="logo">CNN <span>العربية</span></a>
         </div>
+
+        <!-- Mobile Menu -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <a href="#">سياسة</a>
+            <a href="#">اقتصاد</a>
+            <a href="#">مجتمع</a>
+            <a href="#">عدالة</a>
+            <a href="#">دولي</a>
+            <a href="#">رياضة</a>
+        </nav>
     </header>
 
     <!-- Breaking News -->
@@ -42,32 +52,32 @@
 
     <!-- Main Layout -->
     <main class="main-layout">
-        <!-- Sidebar -->
+        <!-- Sidebar (Mobile First) -->
         <aside class="sidebar">
             <div class="sidebar-section">
                 <h3 class="sidebar-title">أخبار ذات صلة</h3>
                 <a href="#" class="related-news-item">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=150&q=80" class="related-img">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=150&q=80" class="related-img" alt="إصلاح العدالة">
                     <div class="related-text">إصلاح منظومة العدالة: رقمنة المحاكم تدخل حيز التنفيذ</div>
                 </a>
                 <a href="#" class="related-news-item">
-                    <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=150&q=80" class="related-img">
+                    <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=150&q=80" class="related-img" alt="المجلس الأعلى">
                     <div class="related-text">المجلس الأعلى للسلطة القضائية يعلن عن حركة انتقالية واسعة</div>
                 </a>
                 <a href="#" class="related-news-item">
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=150&q=80" class="related-img">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=150&q=80" class="related-img" alt="ندوة دولية">
                     <div class="related-text">ندوة دولية بالرباط حول استقلال القضاء في العصر الرقمي</div>
                 </a>
             </div>
 
             <div class="sidebar-section">
                 <h3 class="sidebar-title">الأكثر قراءة</h3>
-                <div style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                    <span style="color: var(--cnn-red); font-weight: bold; font-size: 1.5rem; margin-left: 10px;">1</span>
+                <div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
+                    <span style="color: var(--cnn-red); font-weight: bold; font-size: 1.3rem; margin-left: 10px;">1</span>
                     مسار محمد الهدوني: من التفوق الأكاديمي إلى منصة القضاء
                 </div>
-                <div style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                    <span style="color: var(--cnn-red); font-weight: bold; font-size: 1.5rem; margin-left: 10px;">2</span>
+                <div style="padding: 10px 0;">
+                    <span style="color: var(--cnn-red); font-weight: bold; font-size: 1.3rem; margin-left: 10px;">2</span>
                     شروط ولوج سلك القضاء في المغرب: معايير صارمة للكفاءة
                 </div>
             </div>
@@ -86,7 +96,7 @@
 
             <div class="featured-media">
                 <img src="assets/images/profile.png" alt="محمد الهدوني بزي القضاء" class="featured-image">
-                <div class="image-caption">محمد الهدوني خلال مراسم أداء القسم القانوني بالمعهد العالي للقضاء بالرباط. (تصوير: وكالة الأنباء)</div>
+                <div class="image-caption">محمد الهدوني خلال مراسم أداء القسم القانوني بالمعهد العالي للقضاء بالرباط</div>
             </div>
 
             <div class="article-body">
@@ -100,7 +110,7 @@
 
                 <div class="dua-box">
                     <h3>🤲 كلمة القاضي محمد الهدوني</h3>
-                    <p style="font-style: italic; color: #555;">
+                    <p>
                         "اللهم كما وضعت في قلبي حلم العدالة، فافتح لي أبوابها، ويسّر لي طريقها، وامنحني علماً نافعاً، وحكمةً في الحكم، ونزاهةً في القرار، واجعلني سبباً في إنصاف المظلوم ونصرة الحق، وبلّغني هذا المقام في أحسن حال يا رب."
                     </p>
                 </div>
@@ -109,11 +119,11 @@
             </div>
 
             <!-- Share Buttons -->
-            <div style="display: flex; gap: 10px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
-                <span>مشاركة هذا الخبر:</span>
-                <a href="#" style="color: #3b5998;"><i class="fab fa-facebook fa-lg"></i></a>
-                <a href="#" style="color: #1da1f2;"><i class="fab fa-twitter fa-lg"></i></a>
-                <a href="#" style="color: #25d366;"><i class="fab fa-whatsapp fa-lg"></i></a>
+            <div class="share-section">
+                <span>مشاركة:</span>
+                <a href="#" title="مشاركة على فيسبوك"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="مشاركة على تويتر"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="مشاركة على واتس"><i class="fab fa-whatsapp"></i></a>
             </div>
         </section>
     </main>
@@ -139,19 +149,19 @@
             </div>
             <div class="footer-col">
                 <h4>تابعونا</h4>
-                <div style="display: flex; gap: 15px; margin-top: 10px;">
-                    <a href="#" style="color: #fff;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color: #fff;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="color: #fff;"><i class="fab fa-instagram"></i></a>
-                </div>
+                <ul style="display: flex; gap: 15px; margin-top: 10px;">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
             </div>
             <div class="footer-col">
-                <h2 style="color: var(--cnn-red);">CNN</h2>
-                <p style="font-size: 0.8rem; color: #666;">© 2024 Cable News Network. A Warner Bros. Discovery Company. All Rights Reserved.</p>
+                <h4 style="color: var(--cnn-red);">CNN</h4>
+                <p style="font-size: 0.75rem; color: #666;">© 2024 Cable News Network. A Warner Bros. Discovery Company.</p>
             </div>
         </div>
         <div class="footer-bottom">
-            تصميم وتطوير احترافي لمحاكاة الواقع | جميع الحقوق محفوظة لمحمد الهدوني
+            تصميم وتطوير احترافي | جميع الحقوق محفوظة لمحمد الهدوني
         </div>
     </footer>
 
