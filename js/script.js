@@ -1,167 +1,101 @@
-// Subjects Data
-const subjects = [
-    {
-        id: 1,
-        name: 'القانون المدني',
-        image: 'assets/images/civil_law.jpg',
-        progress: 75,
-        chapters: 12,
-        completed: 9,
-        points: 250
-    },
-    {
-        id: 2,
-        name: 'القانون الجنائي',
-        image: 'assets/images/criminal_law.jpg',
-        progress: 60,
-        chapters: 10,
-        completed: 6,
-        points: 180
-    },
-    {
-        id: 3,
-        name: 'القانون التجاري',
-        image: 'assets/images/commercial_law.jpg',
-        progress: 55,
-        chapters: 8,
-        completed: 4,
-        points: 165
-    },
-    {
-        id: 4,
-        name: 'القانون الإداري',
-        image: 'assets/images/civil_law.jpg',
-        progress: 70,
-        chapters: 9,
-        completed: 6,
-        points: 210
-    },
-    {
-        id: 5,
-        name: 'قانون الأسرة',
-        image: 'assets/images/criminal_law.jpg',
-        progress: 82,
-        chapters: 7,
-        completed: 6,
-        points: 245
-    },
-    {
-        id: 6,
-        name: 'القانون الدستوري',
-        image: 'assets/images/commercial_law.jpg',
-        progress: 45,
-        chapters: 11,
-        completed: 5,
-        points: 135
+// Update Date and Time
+function updateDateTime() {
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'Africa/Casablanca'
+    };
+
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('ar-MA', options);
+    document.getElementById('dateTime').textContent = formatter.format(now);
+
+    // Update publish date
+    const publishDate = document.getElementById('publishDate');
+    if (publishDate) {
+        const dateOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'Africa/Casablanca'
+        };
+        const dateFormatter = new Intl.DateTimeFormat('ar-MA', dateOptions);
+        publishDate.textContent = 'نُشر في: ' + dateFormatter.format(now);
     }
-];
+}
 
-// Tasks Data
-const tasks = [
-    {
-        id: 1,
-        title: 'مراجعة الفصل الثالث من القانون المدني',
-        time: 'غداً - 10:00 صباحاً',
-        completed: false
-    },
-    {
-        id: 2,
-        title: 'حل تمارين القانون الجنائي',
-        time: 'اليوم - 3:00 مساءً',
-        completed: false
-    },
-    {
-        id: 3,
-        title: 'كتابة ملخص عن العقود التجارية',
-        time: 'بعد غد - 5:00 مساءً',
-        completed: false
-    },
-    {
-        id: 4,
-        title: 'اختبار تقييمي في القانون الإداري',
-        time: 'الأسبوع القادم',
-        completed: false
-    }
-];
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
 
-// Load Subjects
-function loadSubjects() {
-    const container = document.getElementById('subjectsContainer');
-    if (!container) return;
-    container.innerHTML = subjects.map(subject => `
-        <div class="subject-card">
-            <img src="${subject.image}" alt="${subject.name}" class="subject-image">
-            <div class="subject-content">
-                <div class="subject-title">${subject.name}</div>
-                <div class="subject-progress">
-                    <div class="progress-label">
-                        <span>التقدم</span>
-                        <span>${subject.progress}%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${subject.progress}%"></div>
-                    </div>
-                </div>
-                <div class="subject-stats">
-                    <div class="stat">
-                        <div class="stat-value">${subject.completed}/${subject.chapters}</div>
-                        <div class="stat-label">فصول</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${subject.points}</div>
-                        <div class="stat-label">نقاط</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    // Add click events to cards
-    document.querySelectorAll('.subject-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const title = this.querySelector('.subject-title').textContent;
-            alert(`تم فتح: ${title}`);
+    // Add smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
-}
 
-// Load Tasks
-function loadTasks() {
-    const container = document.getElementById('tasksContainer');
-    if (!container) return;
-    container.innerHTML = tasks.map(task => `
-        <div class="task-item">
-            <div class="task-checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask(${task.id})">
-                <i class="fas fa-check" style="display: ${task.completed ? 'block' : 'none'};"></i>
-            </div>
-            <div class="task-content">
-                <div class="task-title" style="text-decoration: ${task.completed ? 'line-through' : 'none'}; opacity: ${task.completed ? '0.5' : '1'};">${task.title}</div>
-                <div class="task-time">
-                    <i class="fas fa-clock"></i> ${task.time}
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Toggle Task Completion
-function toggleTask(taskId) {
-    const task = tasks.find(t => t.id === taskId);
-    if (task) {
-        task.completed = !task.completed;
-        loadTasks();
-    }
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    loadSubjects();
-    loadTasks();
-
-    // AI Assistant Buttons
-    document.querySelectorAll('.ai-buttons .btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            alert('تم تفعيل: ' + this.textContent.trim());
+    // Share button functionality
+    document.querySelectorAll('.share-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const icon = btn.querySelector('i').className;
+            
+            if (icon.includes('facebook')) {
+                window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank');
+            } else if (icon.includes('twitter')) {
+                window.open('https://twitter.com/intent/tweet?url=' + window.location.href + '&text=محمد الهدوني يلج سلك القضاء', '_blank');
+            } else if (icon.includes('whatsapp')) {
+                window.open('https://wa.me/?text=' + window.location.href, '_blank');
+            } else if (icon.includes('link')) {
+                navigator.clipboard.writeText(window.location.href);
+                alert('تم نسخ الرابط بنجاح!');
+            }
         });
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeIn 0.8s ease-in-out';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.article-section, .inspiration-section, .dua-section').forEach(el => {
+        observer.observe(el);
     });
 });
+
+// Add CSS animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(style);

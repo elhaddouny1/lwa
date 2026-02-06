@@ -3,145 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المتوقد - منصة القانون الذكية</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    <title>محمد الهدوني يلج سلك القضاء - منصة الأخبار</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="bg-animation"></div>
-    <div class="parallax-bg" id="parallaxBg"></div>
-
     <!-- Header -->
     <header>
-        <div class="header-content">
+        <div class="header-container">
             <div class="logo">
-                <i class="fas fa-scale-balanced"></i>
-                المتوقد
+                <i class="fas fa-scale-balanced"></i> العدالة اليوم
             </div>
-            <div class="user-info">
-                <span>أهلاً، طالب القانون</span>
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-            </div>
+            <nav class="nav">
+                <a href="#home">الرئيسية</a>
+                <a href="#news">الأخبار</a>
+                <a href="#opinion">الرأي</a>
+                <a href="#contact">اتصل بنا</a>
+                <div class="date-time" id="dateTime"></div>
+            </nav>
         </div>
     </header>
 
+    <!-- Breaking News Bar -->
+    <div class="breaking-news">
+        <span>🔴 عاجل</span>
+        محمد الهدوني يلج سلك القضاء في حدث تاريخي يعكس التزام الشباب بخدمة العدالة
+    </div>
+
     <!-- Main Content -->
     <div class="container">
-        <!-- Welcome Section -->
-        <div class="welcome-section">
-            <h1>🏛️ مرحباً بك في منصة المتوقد الذكية</h1>
-            <p>منصة قانونية عصرية متكاملة مستوحاة من العمارة العالمية الحديثة، تجمع بين الفخامة والذكاء الاصطناعي لتطوير مهاراتك القانونية.</p>
-        </div>
+        <!-- Article Section -->
+        <article class="article-section">
+            <!-- Article Meta -->
+            <div class="article-meta">
+                <span class="category">مجتمع / عدالة</span>
+                <span class="publish-date" id="publishDate"></span>
+            </div>
 
-        <!-- Stats Dashboard -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-card-icon">📚</div>
-                <div class="stat-card-value" id="subjectCount">8</div>
-                <div class="stat-card-label">مواد قانونية</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-icon">✅</div>
-                <div class="stat-card-value" id="completedTasks">12</div>
-                <div class="stat-card-label">مهام مكتملة</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-icon">⭐</div>
-                <div class="stat-card-value" id="userPoints">850</div>
-                <div class="stat-card-label">نقاط الإنجاز</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-icon">📈</div>
-                <div class="stat-card-value" id="progressPercent">68%</div>
-                <div class="stat-card-label">التقدم الكلي</div>
-            </div>
-        </div>
+            <!-- Article Title -->
+            <h1 class="article-title">
+                محمد الهدوني يلج سلك القضاء… مسار اجتهاد يتوَّج بخدمة العدالة
+            </h1>
 
-        <!-- Subjects Section -->
-        <h2 style="font-size: 2rem; background: linear-gradient(135deg, #d4af37, #00d9ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 30px;">📖 المواد القانونية</h2>
-        <div class="subjects-grid" id="subjectsContainer">
-            <!-- Subjects will be dynamically loaded here -->
-        </div>
+            <!-- Featured Image -->
+            <img src="assets/images/profile.png" alt="محمد الهدوني - قاضٍ جديد" class="featured-image">
 
-        <!-- AI Assistant Section -->
-        <div class="ai-assistant">
-            <div class="ai-header">
-                <div class="ai-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h2>المساعد الذكي (GPT-4o)</h2>
+            <!-- Social Share -->
+            <div class="social-share">
+                <a href="#" class="share-btn" title="مشاركة على فيسبوك">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="share-btn" title="مشاركة على تويتر">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="share-btn" title="مشاركة على واتس آب">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="share-btn" title="نسخ الرابط">
+                    <i class="fas fa-link"></i>
+                </a>
             </div>
-            <div class="ai-content">
+
+            <!-- Article Content -->
+            <div class="article-content">
                 <p>
-                    مرحباً! أنا مساعدك الذكي المتخصص في القانون، مدعوم بأحدث تقنيات الذكاء الاصطناعي. يمكنني تحليل النصوص القانونية، شرح المفاهيم المعقدة، 
-                    والإجابة على أسئلتك حول أي مادة قانونية. استخدمني لتحسين فهمك وتطوير مهاراتك بشكل متقدم.
+                    في محطة مفصلية من مساره الأكاديمي والمهني، خطا محمد الهدوني اليوم خطوة وازنة بدخوله سلك القضاء، بعد مسار طويل من التحصيل القانوني الصارم والتكوين المتخصص، تُوِّج باستيفاء الشروط العلمية والمؤهلات المطلوبة لتحمل أمانة الفصل في النزاعات وصون الحقوق.
+                </p>
+
+                <p>
+                    التحاق الهدوني بجهاز العدالة لا يُعد مجرد انتقال وظيفي، بل هو انخراط في واحدة من أسمى المسؤوليات داخل الدولة، حيث تتقاطع سلطة القانون مع ضمير القاضي، وتُختبر قيم النزاهة والاستقلال والتجرد. ويؤشر هذا المسار على نموذج شاب اختار طريق القانون لا كمهنة فحسب، بل كرسالة ترتبط بإحقاق العدل وترسيخ دولة الحق والمؤسسات.
+                </p>
+
+                <p>
+                    ويؤكد متتبعون أن ولوج سلك القضاء يظل من المسارات الدقيقة التي لا تحتمل سوى الكفاءة الصارمة والتوازن الشخصي والصلابة الأخلاقية، وهي مقومات تُعد أساساً في ممارسة مهام ترتبط مباشرة بمصائر الأفراد وضمان الأمن القانوني داخل المجتمع.
+                </p>
+
+                <p>
+                    هذا التتويج يشكل بداية مرحلة جديدة، عنوانها المسؤولية قبل الامتياز، والواجب قبل الصفة، في أفق الإسهام في تكريس الثقة في العدالة وجعل القانون سلطة فوق الجميع.
                 </p>
             </div>
-            <div class="ai-buttons">
-                <button class="btn btn-primary">
-                    <i class="fas fa-message"></i> اسأل المساعد
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-lightbulb"></i> نصائح الدراسة
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-book"></i> شرح مفهوم
-                </button>
-            </div>
-        </div>
+        </article>
 
-        <!-- Tasks Section -->
-        <div class="tasks-section">
-            <h2>📋 المهام المقبلة</h2>
-            <div id="tasksContainer">
-                <!-- Tasks will be dynamically loaded here -->
+        <!-- Inspiration Section -->
+        <section class="inspiration-section">
+            <div class="inspiration-title">💫 رسالة تحفيزية</div>
+            <p class="inspiration-quote">
+                هذا الخبر ليس حلماً بعيداً، بل <em>هدف يعمل عليه محمد الهدوني</em>، وسيصبح <em>واقعاً بإذن الله</em> خلال سنوات قليلة.
+            </p>
+        </section>
+
+        <!-- Dua Section -->
+        <section class="dua-section">
+            <h2 class="dua-title">🤲 الدعاء</h2>
+            <div class="dua-content">
+                <p>
+                    اللهم كما وضعت في قلبي حلم العدالة، فافتح لي أبوابها، ويسّر لي طريقها، وامنحني علماً نافعاً، وحكمةً في الحكم، ونزاهةً في القرار، واجعلني سبباً في إنصاف المظلوم ونصرة الحق، وبلّغني هذا المقام في أحسن حال يا رب.
+                </p>
             </div>
-        </div>
+        </section>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-credit">
-                تطوير وإشراف: <strong>محمد الهدوني</strong>
-            </div>
-            <div style="font-size: 0.9rem; color: #666;">
-                © 2024 منصة المتوقد - جميع الحقوق محفوظة | تصميم معماري عالمي
-            </div>
-        </div>
+        <p><strong>منصة الأخبار القانونية</strong> - تغطية شاملة للأحداث القضائية والقانونية</p>
+        <p>© 2024 جميع الحقوق محفوظة | تحت إشراف محمد الهدوني</p>
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-        // Parallax Effect
-        const parallaxBg = document.getElementById('parallaxBg');
-        const backgrounds = [
-            'assets/images/modern_law_building.jpg',
-            'assets/images/futuristic_library.jpg',
-            'assets/images/global_justice_center.jpg'
-        ];
-        let currentBg = 0;
-
-        function updateParallaxBg() {
-            parallaxBg.style.backgroundImage = `url('${backgrounds[currentBg]}')`;
-            currentBg = (currentBg + 1) % backgrounds.length;
-        }
-
-        updateParallaxBg();
-        setInterval(updateParallaxBg, 8000);
-
-        // Parallax scroll effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            if (parallaxBg) {
-                parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-    </script>
 </body>
 </html>
